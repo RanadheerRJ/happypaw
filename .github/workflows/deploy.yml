@@ -31,6 +31,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Guards against a silently broken deploy: if Pages is set to the legacy
+      # branch build, the artifact uploaded below is never served and the URL
+      # returns the raw repo root (blank page). Fail with an actionable message
+      # instead of deploying nowhere.
+      - name: Verify Pages serves the Actions artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          build_type="$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type' 2>/dev/null || echo unknown)"
+          echo "Pages build_type before: ${build_type}"
+
+          if [ "${build_type}" != "workflow" ]; then
+            gh api -X PUT "repos/${GITHUB_REPOSITORY}/pages" -f build_type=workflow >/dev/null 2>&1 || true
+            build_type="$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type' 2>/dev/null || echo unknown)"
+          fi
+
+          if [ "${build_type}" != "workflow" ]; then
+            echo "::error::GitHub Pages is using the '${build_type}' build type, so this artifact will not be served. Fix once in Settings > Pages > Build and deployment > Source = GitHub Actions. See README section 6."
+            exit 1
+          fi
+          echo "Pages is configured to serve the Actions artifact."
+
       - name: Lint
         run: npm run lint
 
