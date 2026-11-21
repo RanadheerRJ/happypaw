@@ -170,6 +170,28 @@ Notes:
 * For a `<user>.github.io` repository set `VITE_BASE_PATH=/`.
 * Demo builds are `noindex` (via `VITE_DEMO_MODE`) and `robots.txt` disallows crawling.
 
+### Troubleshooting: the Pages URL loads but shows nothing
+
+**Symptom:** `https://<user>.github.io/<repo>/` returns 200 but the page is blank, and the page source is the
+repository's raw `index.html` (it contains `<script type="module" src="/src/main.tsx">`).
+
+**Cause:** Pages is using the **legacy branch build** (`build_type: legacy`, source `main` `/`) instead of the
+Actions artifact. The "Deploy to GitHub Pages" workflow still goes green — build, upload and `deploy-pages`
+all succeed — but its artifact is never served, so the raw repo root is published instead.
+
+**Fix (once, requires repo admin):** **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Then re-run the latest *Deploy to GitHub Pages* workflow (Actions → the run → *Re-run all jobs*) or push to
+`main`.
+
+Verify:
+
+```bash
+gh api repos/<owner>/<repo>/pages --jq '{build_type, source, status}'   # expect build_type "workflow"
+```
+
+The deploy workflow now checks this before building and fails with these same instructions if Pages is
+misconfigured, so a blank deploy cannot pass silently again.
+
 ### Switching to BrowserRouter later
 
 1. Set `VITE_ROUTER_MODE=browser` (the app picks `BrowserRouter` instead of `HashRouter`).
