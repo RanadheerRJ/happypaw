@@ -21,6 +21,7 @@ import type {
   Subscription,
   SupportMessage,
   SupportTicket,
+  NotificationPrefs,
   WeeklyMenu,
   WaitlistEntry,
 } from '@/data/types';
@@ -53,6 +54,7 @@ export interface MockDb {
   routeRuns: RouteRun[];
   routeStops: RouteStop[];
   adminNotes: AdminNotes[];
+  notificationPrefs: NotificationPrefs[];
   sessionProfileId: string | null;
 }
 
@@ -630,6 +632,10 @@ export function buildSeedDatabase(): MockDb {
     routeStops,
     adminNotes: [
       { profileId: 'user-customer', note: 'VIP — referred by Dr. Meera. Prefers WhatsApp updates.', updatedAt: addDays(today, -5).toISOString() },
+    ],
+    notificationPrefs: [
+      { profileId: 'user-customer', orderUpdates: true, deliveryReminders: true, offers: false, whatsapp: true },
+      { profileId: 'user-customer-alt', orderUpdates: true, deliveryReminders: true, offers: true, whatsapp: false },
     ],
     sessionProfileId: null,
   };
