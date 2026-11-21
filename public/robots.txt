@@ -1,0 +1,7 @@
+# Happy Paw — demo build.
+# The public demo is intentionally noindex until launch; remove the Disallow
+# lines below (and VITE_DEMO_MODE) for the production site.
+User-agent: *
+Disallow: /
+
+Sitemap: https://happypaw.example/sitemap.xml

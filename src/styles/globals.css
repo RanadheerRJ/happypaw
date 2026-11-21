@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cream: 251 247 240;
+    --forest: 31 61 43;
+    --terracotta: 217 108 63;
+    --sage: 168 195 160;
+    --charcoal: 43 43 43;
+    color-scheme: light;
+  }
+
+  * {
+    @apply border-forest/10;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-cream font-sans text-charcoal antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-forest;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgb(var(--sage) / 0.45);
+    color: rgb(var(--forest));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--forest));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Respect the OS "reduce motion" setting for every decorative animation. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply container mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta-600;
+  }
+
+  .display-1 {
+    @apply font-display text-[2.6rem] font-extrabold leading-[1.03] sm:text-6xl lg:text-[4.25rem];
+  }
+
+  .display-2 {
+    @apply font-display text-[2rem] font-extrabold leading-[1.08] sm:text-4xl lg:text-[2.9rem];
+  }
+
+  .display-3 {
+    @apply font-display text-2xl font-bold leading-tight sm:text-3xl;
+  }
+
+  .lede {
+    @apply text-base leading-relaxed text-charcoal-600 sm:text-lg;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-forest/10 bg-white shadow-soft;
+  }
+
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: theme('backgroundImage.grain');
+    opacity: 0.035;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .skip-link {
+    @apply absolute left-4 top-4 z-[100] -translate-y-24 rounded-full bg-forest px-5 py-3 text-sm font-semibold text-cream transition-transform focus:translate-y-0;
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .prose-happypaw {
+    @apply max-w-3xl text-[15px] leading-7 text-charcoal-600;
+  }
+  .prose-happypaw h2 {
+    @apply mb-3 mt-10 font-display text-xl font-bold text-forest;
+  }
+  .prose-happypaw h3 {
+    @apply mb-2 mt-6 font-display text-base font-bold text-forest;
+  }
+  .prose-happypaw p {
+    @apply mb-4;
+  }
+  .prose-happypaw ul {
+    @apply mb-4 list-disc space-y-2 pl-5;
+  }
+  .prose-happypaw a {
+    @apply font-medium text-forest underline decoration-sage-400 underline-offset-4 hover:decoration-forest;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .animate-pause {
+    animation-play-state: paused;
+  }
+  .ring-sandbox {
+    @apply ring-1 ring-inset ring-forest/10;
+  }
+}
+
+/* Printable route sheets and kitchen prep lists (used from Phase 5). */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-page {
+    break-after: page;
+  }
+  a[href]::after {
+    content: none !important;
+  }
+}
