@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import {
   BrowserRouter,
   HashRouter,
@@ -10,6 +10,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { PublicLayout } from '@/components/layout/PublicLayout';
+import { RouteFallback } from '@/components/shared/RouteFallback';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { RequireRole } from '@/features/auth/RequireRole';
 import { env } from '@/config/env';
@@ -31,6 +32,28 @@ const ForgotPasswordPage = lazy(() => import('@/pages/public/ForgotPasswordPage'
 const NotFoundPage = lazy(() => import('@/pages/public/NotFoundPage'));
 const ForbiddenPage = lazy(() => import('@/pages/public/ForbiddenPage'));
 const PortalPreviewPage = lazy(() => import('@/pages/portal/PortalPreviewPage'));
+const PortalLayout = lazy(() =>
+  import('@/components/app/PortalLayout').then((module) => ({ default: module.PortalLayout })),
+);
+const OverviewPage = lazy(() => import('@/pages/app/OverviewPage'));
+const DogsPage = lazy(() => import('@/pages/app/DogsPage'));
+const DogDetailPage = lazy(() => import('@/pages/app/DogDetailPage'));
+const NewDogPage = lazy(() =>
+  import('@/pages/app/DogWizardPages').then((module) => ({ default: module.NewDogPage })),
+);
+const EditDogPage = lazy(() =>
+  import('@/pages/app/DogWizardPages').then((module) => ({ default: module.EditDogPage })),
+);
+const SubscribePage = lazy(() => import('@/pages/app/SubscribePage'));
+const SubscriptionsPage = lazy(() => import('@/pages/app/SubscriptionsPage'));
+const SubscriptionDetailPage = lazy(() => import('@/pages/app/SubscriptionDetailPage'));
+const OrdersPage = lazy(() => import('@/pages/app/OrdersPage'));
+const OrderDetailPage = lazy(() => import('@/pages/app/OrderDetailPage'));
+const DeliveriesPage = lazy(() => import('@/pages/app/DeliveriesPage'));
+const SupportPage = lazy(() => import('@/pages/app/SupportPage'));
+const TicketDetailPage = lazy(() => import('@/pages/app/TicketDetailPage'));
+const SettingsPage = lazy(() => import('@/pages/app/SettingsPage'));
+const PortalNotFoundPage = lazy(() => import('@/pages/app/PortalNotFoundPage'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,10 +103,31 @@ export default function App() {
                     path="app"
                     element={
                       <RequireRole role="customer">
-                        <PortalPreviewPage role="customer" />
+                        <Suspense fallback={<RouteFallback />}>
+                          <PortalLayout />
+                        </Suspense>
                       </RequireRole>
                     }
-                  />
+                  >
+                    <Route index element={<OverviewPage />} />
+                    <Route path="dogs" element={<DogsPage />} />
+                    <Route path="dogs/new" element={<NewDogPage />} />
+                    <Route path="dogs/:dogId" element={<DogDetailPage />} />
+                    <Route path="dogs/:dogId/edit" element={<EditDogPage />} />
+                    <Route path="subscribe" element={<SubscribePage />} />
+                    <Route path="subscriptions" element={<SubscriptionsPage />} />
+                    <Route
+                      path="subscriptions/:subscriptionId"
+                      element={<SubscriptionDetailPage />}
+                    />
+                    <Route path="orders" element={<OrdersPage />} />
+                    <Route path="orders/:orderId" element={<OrderDetailPage />} />
+                    <Route path="deliveries" element={<DeliveriesPage />} />
+                    <Route path="support" element={<SupportPage />} />
+                    <Route path="support/:ticketId" element={<TicketDetailPage />} />
+                    <Route path="settings" element={<SettingsPage />} />
+                    <Route path="*" element={<PortalNotFoundPage />} />
+                  </Route>
                   <Route
                     path="vet"
                     element={

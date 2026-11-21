@@ -94,6 +94,16 @@ export interface Profile {
   phone: string | null;
   avatarUrl: string | null;
   createdAt: string;
+  /** Soft-delete marker for "delete my account"; deleted accounts cannot sign in. */
+  deletedAt?: string | null;
+}
+
+export interface NotificationPrefs {
+  profileId: string;
+  orderUpdates: boolean;
+  deliveryReminders: boolean;
+  offers: boolean;
+  whatsapp: boolean;
 }
 
 export interface AuthUser {
@@ -217,6 +227,8 @@ export interface Order {
 
 export interface OrderWithItems extends Order {
   items: OrderItem[];
+  /** Present once the simulated checkout has recorded a payment. */
+  payment: Payment | null;
 }
 
 export type PaymentStatus = 'simulated' | 'pending' | 'refunded';
@@ -342,4 +354,61 @@ export interface AdminNotes {
   profileId: string;
   note: string;
   updatedAt: string;
+}
+
+
+// ---------------------------------------------------------------------------
+// Customer portal (Phase 3)
+// ---------------------------------------------------------------------------
+
+/** A subscription joined with everything the customer portal needs to render it. */
+export interface SubscriptionWithDetails extends Subscription {
+  plan: Plan;
+  dog: Dog;
+  addons: Addon[];
+  address: Address | null;
+}
+
+export type DogInput = Omit<Dog, 'id' | 'ownerId' | 'createdAt'>;
+
+export interface AddressInput {
+  profileId: string;
+  label: string;
+  line1: string;
+  line2?: string | null;
+  area: string;
+  city: string;
+  pincode: string;
+  isDefault?: boolean;
+}
+
+export interface CreateSubscriptionInput {
+  customerId: string;
+  dogId: string;
+  planId: string;
+  addonIds: string[];
+  addressId: string;
+  couponCode?: string | null;
+  notes?: string | null;
+}
+
+export interface SimulatedCheckoutResult {
+  subscription: SubscriptionWithDetails;
+  order: OrderWithItems;
+  payment: Payment;
+}
+
+export interface CouponValidation {
+  valid: boolean;
+  coupon: Coupon | null;
+  discountInr: number;
+  message: string;
+}
+
+export interface NewTicketInput {
+  customerId: string;
+  subject: string;
+  category: string;
+  priority: TicketPriority;
+  message: string;
 }

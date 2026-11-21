@@ -112,7 +112,28 @@ You can also one-click any of these from `/login` when demo mode is on.
 | `/legal/terms` · `/privacy` · `/refunds` · `/food-safety` | Draft documents, clearly marked pending legal review |
 | `/login` · `/signup` · `/forgot-password` | Full validation, mock auth, demo logins |
 | `/403` · `*` | Forbidden and NotFound |
-| `/app` · `/vet` · `/admin` | Guarded role entry points (portal screens land in Phases 3–5) |
+| `/app` | Customer portal (see below) — role-gated to `customer` |
+| `/vet` · `/admin` | Guarded role entry points (portal screens land in Phases 4–5) |
+
+### Customer portal (Phase 3, complete)
+
+| Route | What it does |
+|---|---|
+| `/app` | Dashboard: next delivery, active plan, dogs, recent orders, open tickets |
+| `/app/dogs` · `/app/dogs/new` · `/app/dogs/:id` · `/app/dogs/:id/edit` | Dog list, 4-step onboarding wizard, profile with weight chart + diet plan, edit |
+| `/app/subscribe` | 4-step checkout: dog → plan → extras/address/coupon → review, then the simulated Razorpay modal |
+| `/app/subscriptions` · `/app/subscriptions/:id` | Pause (with resume date), resume, skip next, change plan, edit add-ons, change address, cancel with reason |
+| `/app/orders` · `/app/orders/:id` | Filterable order history and a print/PDF invoice with the simulated payment reference |
+| `/app/deliveries` | Upcoming boxes with a kitchen → van → door timeline, plus past deliveries |
+| `/app/support` · `/app/support/:id` | Raise a ticket (category + priority) and reply in the thread |
+| `/app/settings` | Profile, saved addresses, notification toggles, password change, delete account |
+
+Every mutation goes through `DataClient`, so the same UI works against the mock fixtures and (from Phase 6)
+Supabase. Pause / skip / cancel and notification toggles update optimistically and roll back on failure.
+
+**Demo coupons:** `FIRSTPAW` (15% off, min ₹749), `HYD100` (₹100 off, min ₹999), `VETLOVE` (10% off),
+`SUNDAY50` (deliberately expired). The checkout never calls Razorpay: there is no SDK and no key. It creates
+an order, order items and a payment row with `status: 'simulated'`.
 
 ### Auth & guards
 
@@ -143,14 +164,14 @@ Cut-off: **order by Thursday 11:59 PM for Sunday delivery, 7 AM – 12 PM.** Val
 |---|---|---|
 | 1 | Foundation: scaffold, design system, config, mock data layer, routing, 403/404, README | ✅ done |
 | 2 | Public marketing site, pricing, menu, delivery checker, animations, legal drafts, auth UI | ✅ done |
-| 3 | Auth + customer portal (dog wizard, subscription checkout, orders, deliveries, support, settings) | ⏳ next |
+| 3 | Auth + customer portal (dog wizard, subscription checkout, orders, deliveries, support, settings) | ✅ done |
 | 4 | Vet portal | ⏳ |
 | 5 | Admin portal (kitchen prep list, delivery routes, CRUD, ⌘K) | ⏳ |
 | 6 | Supabase migrations, RLS, seed SQL, adapter, parity tests | ⏳ |
 | 7 | Accessibility audit, Lighthouse pass, state sweep, README finalisation | ⏳ |
 
-The `/app`, `/vet` and `/admin` routes currently confirm role-based entry and list what each portal will
-contain. They are replaced by real dashboards in the next phases.
+The `/vet` and `/admin` routes still confirm role-based entry and list what each portal will contain. They
+are replaced by real dashboards in Phases 4–5; `/app` is now the real customer portal.
 
 ---
 
@@ -245,11 +266,14 @@ src/
     marketing/    Header, Footer, Hero, sections, PlanCard, RecipeCard, PincodeChecker…
     shared/       SEO, Reveal, SectionHeading, StatCounter, EmptyState, Logo,
                   DemoBanner, DemoSwitcher, RouteFallback
+    app/          PortalLayout, PortalHeader/status badges, ConfirmDialog,
+                  SimulatedCheckoutDialog, AddressFormDialog, WeightChart
     layout/       PublicLayout
   features/auth/  AuthProvider, RequireRole, AuthShell
-  hooks/          useCatalog (TanStack Query)
-  lib/            validators, format, dates, motion helpers, utils
-  pages/          public/, portal/
+  features/portal/DogWizard
+  hooks/          useCatalog, usePortal (TanStack Query queries + mutations)
+  lib/            validators, format, dates, portal helpers, motion helpers, utils
+  pages/          public/, portal/, app/
   styles/         globals.css (design tokens, grain, print, reduced motion)
   test/           Vitest setup
 supabase/         migrations/, seed.sql, policies.sql     (Phase 6)
@@ -278,7 +302,7 @@ needs to change.
 ## 9. Tests
 
 ```bash
-npm run test          # 60 tests
+npm run test          # 88 tests
 npm run test:watch
 ```
 
@@ -289,8 +313,13 @@ Coverage today:
 * Pricing — published prices, 10% monthly maths, per-day rounding, savings badge, seeded areas.
 * Mock adapter CRUD — catalog ordering/active flags, weekly menu composition, pincode checks, waitlist
   de-duplication, auth (sign-in, wrong password, signup, signout), reset.
+* Customer adapter — dog create/update/weigh-in (with the pending diet plan), addresses and default flag,
+  coupon validation (percent, flat, minimum order, inactive, unknown), simulated checkout (order + items +
+  `simulated` payment), pause/resume/skip/change-plan/add-ons/address/cancel state machine, support ticket
+  create + reply, notification prefs, password change, soft-deleted account cannot sign in.
 * Role guards — signed-out redirect, correct-role access, cross-role `403`.
-* Page smoke tests — every public page and all three portal previews render with the right heading.
+* Page smoke tests — every public page, all three portal previews and all eight customer portal pages render
+  with the right heading.
 
 ---
 
@@ -332,16 +361,15 @@ policies are illustrative._
 
 ---
 
-## 13. Checking in (Phase 2 review)
+## 13. Checking in (Phase 3 review)
 
-This build is the Phase 1 + Phase 2 checkpoint:
+This build is the Phase 1–3 checkpoint:
 
-* Every public route in the sitemap renders, is responsive, and is reachable by hash deep link.
-* All data comes through `DataClient` in **mock** mode — no network, no secrets, no backend.
-* Role guards, demo logins and the floating role switcher work end to end.
-* `lint`, `typecheck`, `test` (60 tests) and `build` all pass, and the build has been verified with a
-  `VITE_BASE_PATH=/<repo>/` GitHub Pages base path.
-* Portals (`/app`, `/vet`, `/admin`) are role-gated placeholders that list the Phase 3–5 scope.
+* Every public route renders, is responsive, and is reachable by hash deep link.
+* The customer portal works end to end in mock mode: add a dog → checkout with a coupon → simulated
+  payment → pause/skip/change/cancel → invoice → support thread → settings, with no network calls.
+* All data comes through `DataClient`; role guards, demo logins and the floating role switcher still work.
+* `lint`, `typecheck`, `test` (88 tests) and `build` all pass.
+* `/vet` and `/admin` remain role-gated placeholders that list the Phase 4–5 scope.
 
-Next up: Phase 3 (customer portal — dog wizard, simulated checkout, subscription management, orders,
-deliveries, support, settings) against the same mock fixtures.
+Next up: Phase 4 (vet portal) against the same mock fixtures.

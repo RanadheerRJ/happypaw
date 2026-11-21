@@ -1,5 +1,15 @@
 import { env } from '@/config/env';
-import { DataError, type DataClient } from '@/data/client';
+import {
+  DataError,
+  type AddressApi,
+  type CouponApi,
+  type DataClient,
+  type DogApi,
+  type OrderApi,
+  type SettingsApi,
+  type SubscriptionApi,
+  type SupportApi,
+} from '@/data/client';
 
 /**
  * Supabase adapter — implemented in Phase 6 against the migrations in
@@ -12,6 +22,13 @@ function unavailable(): never {
     'Supabase mode is not wired up in this build yet. Set VITE_DATA_MODE=mock, or finish Phase 6 (migrations + adapter).',
     'supabase_not_configured',
   );
+}
+
+/** Every method throws until Phase 6 wires the real queries. */
+function notImplemented<T extends object>(): T {
+  return new Proxy({} as T, {
+    get: () => unavailable,
+  });
 }
 
 export const supabaseClient: DataClient = {
@@ -37,6 +54,13 @@ export const supabaseClient: DataClient = {
     get: unavailable,
     update: unavailable,
   },
+  addresses: notImplemented<AddressApi>(),
+  dogs: notImplemented<DogApi>(),
+  subscriptions: notImplemented<SubscriptionApi>(),
+  orders: notImplemented<OrderApi>(),
+  support: notImplemented<SupportApi>(),
+  coupons: notImplemented<CouponApi>(),
+  settings: notImplemented<SettingsApi>(),
   waitlist: { join: unavailable },
   demo: {
     async reset() {

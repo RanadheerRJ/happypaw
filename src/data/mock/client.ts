@@ -1,6 +1,16 @@
 import { env } from '@/config/env';
 import { DataError, type DataClient } from '@/data/client';
 import { loadDb, mutate, newId, resetDb, simulateNetwork } from '@/data/mock/db';
+import {
+  isAccountDeleted,
+  mockAddresses,
+  mockCoupons,
+  mockDogs,
+  mockOrders,
+  mockSettings,
+  mockSubscriptions,
+  mockSupport,
+} from '@/data/mock/customer';
 import type {
   AuthUser,
   DeliveryZone,
@@ -51,6 +61,9 @@ export const mockClient: DataClient = {
       const normalized = email.trim().toLowerCase();
       const profile = db.profiles.find((item) => item.email.toLowerCase() === normalized);
       if (!profile) throw new DataError('No account found with that email.', 'invalid_credentials');
+      if (isAccountDeleted(profile)) {
+        throw new DataError('This account has been deleted. Contact support to restore it.', 'account_deleted');
+      }
       const expected = db.credentials[profile.email] ?? 'Demo@1234';
       if (password !== expected) throw new DataError('That password does not match.', 'invalid_credentials');
       mutate((next) => {
@@ -175,6 +188,14 @@ export const mockClient: DataClient = {
       return { pincode: cleaned, served: areas.length > 0, areas: areas.map((zone) => ({ ...zone })) };
     },
   },
+
+  addresses: mockAddresses,
+  dogs: mockDogs,
+  subscriptions: mockSubscriptions,
+  orders: mockOrders,
+  support: mockSupport,
+  coupons: mockCoupons,
+  settings: mockSettings,
 
   profiles: {
     async get(profileId) {
