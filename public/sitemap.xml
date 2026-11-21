@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://happypaw.example/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://happypaw.example/menu</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://happypaw.example/plans</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://happypaw.example/how-it-works</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://happypaw.example/delivery-areas</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://happypaw.example/vets</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://happypaw.example/about</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://happypaw.example/faq</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://happypaw.example/contact</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://happypaw.example/signup</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://happypaw.example/legal/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://happypaw.example/legal/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://happypaw.example/legal/refunds</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://happypaw.example/legal/food-safety</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+</urlset>
