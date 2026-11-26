@@ -1,13 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from '@/features/auth/AuthProvider';
-import { resetDb } from '@/data/mock/db';
 import { dataClient } from '@/data';
+import { resetFakeDb, signInAsRole } from '@/test/fakeDataClient';
 import SubscribePage from '@/pages/app/SubscribePage';
+
+vi.mock('@/data', async (importOriginal) => {
+  const { fakeDataClient } = await import('@/test/fakeDataClient');
+  const actual = await importOriginal<typeof import('@/data')>();
+  return {
+    ...actual,
+    dataClient: fakeDataClient,
+    subscribeAuthState: () => () => undefined,
+  };
+});
 
 function renderCheckout() {
   const queryClient = new QueryClient({
@@ -32,13 +42,13 @@ function renderCheckout() {
 
 beforeEach(() => {
   window.localStorage.clear();
-  resetDb();
+  resetFakeDb();
 });
 
 describe('customer checkout flow', () => {
-  it('walks dog → plan → delivery → review and completes a simulated payment', async () => {
+  it('walks dog → plan → delivery → review and completes the online payment', async () => {
     const user = userEvent.setup();
-    await dataClient.auth.signInAsDemo('customer');
+    await signInAsRole('customer');
     renderCheckout();
 
     expect(
@@ -55,17 +65,15 @@ describe('customer checkout flow', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: /continue/i })).toBeEnabled(), {
       timeout: 5000,
     });
-
-    // Apply a coupon before leaving this step? Coupons live on the delivery step.
     await user.click(screen.getByRole('button', { name: /continue/i }));
 
     // Step 3 — delivery: default address + coupon.
     expect(await screen.findByRole('heading', { name: /delivery address/i })).toBeInTheDocument();
     const couponInput = screen.getByLabelText(/coupon code/i);
-    await user.type(couponInput, 'FIRSTPAW');
+    await user.type(couponInput, 'FIRSTBOX');
     await user.click(screen.getByRole('button', { name: /^apply$/i }));
     expect(
-      await screen.findByText(/firstpaw applied/i, undefined, { timeout: 5000 }),
+      await screen.findByText(/firstbox applied/i, undefined, { timeout: 5000 }),
     ).toBeInTheDocument();
 
     await waitFor(() => expect(screen.getByRole('button', { name: /continue/i })).toBeEnabled(), {
@@ -75,10 +83,10 @@ describe('customer checkout flow', () => {
 
     // Step 4 — review and pay.
     expect(await screen.findByRole('heading', { name: /^review$/i })).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: /pay .*simulated/i }));
+    await user.click(screen.getByRole('button', { name: /pay .*upi/i }));
 
     expect(await screen.findByRole('heading', { name: /complete your payment/i })).toBeInTheDocument();
-    await user.click(await screen.findByRole('button', { name: /pay now/i }));
+    await user.click(await screen.findByRole('button', { name: /confirm payment/i }));
 
     expect(
       await screen.findByRole('heading', { name: /booked in for sunday/i, level: 1 }, { timeout: 6000 }),
@@ -87,6 +95,6 @@ describe('customer checkout flow', () => {
     const orders = await dataClient.orders.list('user-customer');
     const fresh = orders.find((order) => order.discountInr > 0);
     expect(fresh).toBeDefined();
-    expect(fresh?.payment?.status).toBe('simulated');
+    expect(fresh?.payment?.status).toBe('pending');
   }, 30_000);
 });

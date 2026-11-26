@@ -46,7 +46,7 @@ export default function TicketDetailPage() {
     return (
       <ErrorState
         title="Ticket not found"
-        description="This conversation is not in the demo database."
+        description="We could not find this conversation."
         onRetry={() => void ticketQuery.refetch()}
       />
     );

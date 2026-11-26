@@ -72,7 +72,7 @@ export default function OverviewPage() {
     return (
       <ErrorState
         title="We could not load your dashboard"
-        description="The demo database did not respond. Try again — nothing has been lost."
+        description="We could not load your dashboard. Try again — nothing has been lost."
         onRetry={() => {
           void dogsQuery.refetch();
           void subscriptionsQuery.refetch();

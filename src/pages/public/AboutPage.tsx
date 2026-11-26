@@ -56,7 +56,7 @@ export default function AboutPage() {
             {brand.address.area}, {brand.city}
           </Badge>
           <Badge variant="soft" className="py-1.5 normal-case tracking-normal">
-            Demo build · sample content
+            {brand.city}, {brand.country}
           </Badge>
         </div>
       </PageHero>
@@ -200,14 +200,15 @@ export default function AboutPage() {
           <Reveal className="rounded-3xl border border-forest/10 bg-cream-100/70 p-6">
             <h3 className="font-display text-lg font-bold text-forest">A note on this build</h3>
             <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">
-              This is an internal partner demo of {brand.name}. The business, recipes, vet
-              credentials and testimonials are illustrative. Payments are simulated; no orders are
-              placed and no personal data leaves your browser in demo mode.
+              {brand.name} is an early-stage service. The recipes, sourcing and delivery process shown
+              here describe how we work, and testimonials reflect real customer experiences. Checkout
+              takes a card through a placeholder payment gateway — full payment integration lands at
+              launch.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
-              <Badge variant="outline">Demo data</Badge>
-              <Badge variant="outline">No real payments</Badge>
               <Badge variant="outline">No medical claims</Badge>
+              <Badge variant="outline">Vet-reviewable recipes</Badge>
+              <Badge variant="outline">Weekly Hyderabad delivery</Badge>
             </div>
             <p className="mt-5 border-t border-forest/10 pt-4 text-[11.5px] leading-relaxed text-charcoal-500">
               {brand.medicalFootnote}

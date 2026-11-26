@@ -86,9 +86,8 @@ export default function LegalPage() {
 
           <div className="max-w-3xl">
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-[12.5px] leading-relaxed text-amber-900">
-              <strong className="font-semibold">Draft for internal review.</strong> This document was
-              written for a partner demo and must be reviewed by a qualified lawyer before launch.
-              It is not legal advice.
+              <strong className="font-semibold">Draft for internal review.</strong> This document is a
+              draft and must be reviewed by a qualified lawyer before launch. It is not legal advice.
             </div>
 
             <article className="mt-8 space-y-8">

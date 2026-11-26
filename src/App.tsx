@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { PublicLayout } from '@/components/layout/PublicLayout';
 import { RouteFallback } from '@/components/shared/RouteFallback';
+import { ErrorBoundary } from '@/components/shared/ErrorBoundary';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { RequireRole } from '@/features/auth/RequireRole';
 import { env } from '@/config/env';
@@ -80,9 +81,10 @@ export default function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Router>
+          <ErrorBoundary>
+            <Router>
             <ScrollToTop />
-            <Routes>
+              <Routes>
                 <Route element={<PublicLayout />}>
                   <Route index element={<LandingPage />} />
                   <Route path="menu" element={<MenuPage />} />
@@ -98,56 +100,58 @@ export default function App() {
                   <Route path="login" element={<LoginPage />} />
                   <Route path="signup" element={<SignupPage />} />
                   <Route path="forgot-password" element={<ForgotPasswordPage />} />
-
-                  <Route
-                    path="app"
-                    element={
-                      <RequireRole role="customer">
-                        <Suspense fallback={<RouteFallback />}>
-                          <PortalLayout />
-                        </Suspense>
-                      </RequireRole>
-                    }
-                  >
-                    <Route index element={<OverviewPage />} />
-                    <Route path="dogs" element={<DogsPage />} />
-                    <Route path="dogs/new" element={<NewDogPage />} />
-                    <Route path="dogs/:dogId" element={<DogDetailPage />} />
-                    <Route path="dogs/:dogId/edit" element={<EditDogPage />} />
-                    <Route path="subscribe" element={<SubscribePage />} />
-                    <Route path="subscriptions" element={<SubscriptionsPage />} />
-                    <Route
-                      path="subscriptions/:subscriptionId"
-                      element={<SubscriptionDetailPage />}
-                    />
-                    <Route path="orders" element={<OrdersPage />} />
-                    <Route path="orders/:orderId" element={<OrderDetailPage />} />
-                    <Route path="deliveries" element={<DeliveriesPage />} />
-                    <Route path="support" element={<SupportPage />} />
-                    <Route path="support/:ticketId" element={<TicketDetailPage />} />
-                    <Route path="settings" element={<SettingsPage />} />
-                    <Route path="*" element={<PortalNotFoundPage />} />
-                  </Route>
-                  <Route
-                    path="vet"
-                    element={
-                      <RequireRole role="vet">
-                        <PortalPreviewPage role="vet" />
-                      </RequireRole>
-                    }
-                  />
-                  <Route
-                    path="admin"
-                    element={
-                      <RequireRole role="admin">
-                        <PortalPreviewPage role="admin" />
-                      </RequireRole>
-                    }
-                  />
+                  <Route path="reset-password" element={<ForgotPasswordPage />} />
 
                   <Route path="403" element={<ForbiddenPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Route>
+
+                <Route
+                  path="app"
+                  element={
+                    <RequireRole role="customer">
+                      <Suspense fallback={<RouteFallback />}>
+                        <PortalLayout />
+                      </Suspense>
+                    </RequireRole>
+                  }
+                >
+                  <Route index element={<OverviewPage />} />
+                  <Route path="dogs" element={<DogsPage />} />
+                  <Route path="dogs/new" element={<NewDogPage />} />
+                  <Route path="dogs/:dogId" element={<DogDetailPage />} />
+                  <Route path="dogs/:dogId/edit" element={<EditDogPage />} />
+                  <Route path="subscribe" element={<SubscribePage />} />
+                  <Route path="subscriptions" element={<SubscriptionsPage />} />
+                  <Route
+                    path="subscriptions/:subscriptionId"
+                    element={<SubscriptionDetailPage />}
+                  />
+                  <Route path="orders" element={<OrdersPage />} />
+                  <Route path="orders/:orderId" element={<OrderDetailPage />} />
+                  <Route path="deliveries" element={<DeliveriesPage />} />
+                  <Route path="support" element={<SupportPage />} />
+                  <Route path="support/:ticketId" element={<TicketDetailPage />} />
+                  <Route path="settings" element={<SettingsPage />} />
+                  <Route path="*" element={<PortalNotFoundPage />} />
+                </Route>
+
+                <Route
+                  path="vet"
+                  element={
+                    <RequireRole role="vet">
+                      <PortalPreviewPage role="vet" />
+                    </RequireRole>
+                  }
+                />
+                <Route
+                  path="admin"
+                  element={
+                    <RequireRole role="admin">
+                      <PortalPreviewPage role="admin" />
+                    </RequireRole>
+                  }
+                />
               </Routes>
             <Toaster
               position="bottom-center"
@@ -162,7 +166,8 @@ export default function App() {
                 },
               }}
             />
-          </Router>
+            </Router>
+          </ErrorBoundary>
         </AuthProvider>
       </QueryClientProvider>
     </HelmetProvider>

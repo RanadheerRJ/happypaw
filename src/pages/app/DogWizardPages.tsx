@@ -49,7 +49,7 @@ export function EditDogPage() {
     return (
       <ErrorState
         title="We could not find that dog"
-        description="The profile may have been removed from the demo database."
+        description="The profile may have been removed."
         onRetry={() => void dogQuery.refetch()}
       />
     );

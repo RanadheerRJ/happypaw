@@ -1,12 +1,21 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import type { ReactElement } from 'react';
 import { AuthProvider } from '@/features/auth/AuthProvider';
-import { resetDb } from '@/data/mock/db';
-import { dataClient } from '@/data';
+import { resetFakeDb, signInAsRole } from '@/test/fakeDataClient';
+
+vi.mock('@/data', async (importOriginal) => {
+  const { fakeDataClient } = await import('@/test/fakeDataClient');
+  const actual = await importOriginal<typeof import('@/data')>();
+  return {
+    ...actual,
+    dataClient: fakeDataClient,
+    subscribeAuthState: () => () => undefined,
+  };
+});
 
 import LandingPage from '@/pages/public/LandingPage';
 import MenuPage from '@/pages/public/MenuPage';
@@ -28,7 +37,7 @@ import PortalPreviewPage from '@/pages/portal/PortalPreviewPage';
 
 function renderPage(path: string, element: ReactElement, pattern = '*') {
   window.localStorage.clear();
-  resetDb();
+  resetFakeDb();
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
     <HelmetProvider>
@@ -78,8 +87,8 @@ describe('guarded portals render for the right role', () => {
     ['admin', <PortalPreviewPage role="admin" />, /run the whole week/i],
   ] as const)('renders the %s portal preview', async (role, element, heading) => {
     window.localStorage.clear();
-    resetDb();
-    await dataClient.auth.signInAsDemo(role);
+    resetFakeDb();
+    await signInAsRole(role);
     renderPage('/portal', element);
     expect(await screen.findByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
   });

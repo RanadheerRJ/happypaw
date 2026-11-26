@@ -2,7 +2,6 @@ import type {
   Addon,
   Address,
   AddressInput,
-  AuthUser,
   CouponValidation,
   CreateSubscriptionInput,
   DataMode,
@@ -19,7 +18,7 @@ import type {
   Recipe,
   Session,
   SignUpInput,
-  SimulatedCheckoutResult,
+  CheckoutResult,
   NewTicketInput,
   SubscriptionWithDetails,
   SupportTicketWithMessages,
@@ -33,8 +32,6 @@ export interface AuthApi {
   signUp(input: SignUpInput): Promise<Session>;
   signOut(): Promise<void>;
   resetPassword(email: string): Promise<void>;
-  /** Demo-only shortcut. Throws when demo mode is off. */
-  signInAsDemo(role: AuthUser['role']): Promise<Session>;
 }
 
 export interface CatalogApi {
@@ -72,7 +69,7 @@ export interface AddressApi {
 export interface SubscriptionApi {
   list(customerId: string): Promise<SubscriptionWithDetails[]>;
   get(subscriptionId: string): Promise<SubscriptionWithDetails | null>;
-  create(input: CreateSubscriptionInput): Promise<SimulatedCheckoutResult>;
+  create(input: CreateSubscriptionInput): Promise<CheckoutResult>;
   pause(subscriptionId: string, untilIso: string): Promise<SubscriptionWithDetails>;
   resume(subscriptionId: string): Promise<SubscriptionWithDetails>;
   skipNext(subscriptionId: string): Promise<SubscriptionWithDetails>;
@@ -127,8 +124,14 @@ export interface DataClient {
   waitlist: {
     join(input: { email: string; pincode: string }): Promise<WaitlistEntry>;
   };
-  demo: {
-    reset(): Promise<void>;
+  contact: {
+    submit(input: {
+      name: string;
+      email: string;
+      phone?: string | null;
+      topic: string;
+      message: string;
+    }): Promise<{ id: string }>;
   };
 }
 

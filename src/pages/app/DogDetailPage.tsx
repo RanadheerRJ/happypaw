@@ -70,7 +70,7 @@ export default function DogDetailPage() {
     return (
       <ErrorState
         title="Dog not found"
-        description="This profile is not in the demo database."
+        description="We could not find this dog profile."
         onRetry={() => void dogQuery.refetch()}
       />
     );

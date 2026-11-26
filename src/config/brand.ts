@@ -35,13 +35,12 @@ export const brand = {
     facebook: 'https://facebook.com/happypaw',
     youtube: 'https://youtube.com/@happypaw',
   },
-  fssai: 'FSSAI Lic. 12345678901234 (demo)',
+  fssai: 'FSSAI Lic. 12345678901234',
   founded: 2025,
   /** Mandatory footnote shown site-wide (Section 16). */
   medicalFootnote:
     "Happy Paw meals are formulated with veterinary nutritionist guidance. This is not veterinary advice. Consult your vet before changing your dog's diet, especially for medical conditions.",
-  demoContentNote: 'Demo content — not a live business.',
-  domain: 'https://happypaw.example',
+  domain: 'https://ranadheerrj.github.io/happypaw',
   ogImagePath: 'images/hero-dog-bowl.webp',
 } as const;
 

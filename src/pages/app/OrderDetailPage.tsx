@@ -12,6 +12,23 @@ import { deliverySchedule } from '@/config/pricing';
 import { formatDate, formatDateTime, formatINR } from '@/lib/format';
 import { invoiceNumber, orderStep, orderTimeline } from '@/lib/portal';
 import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/badge';
+import type { PaymentStatus } from '@/data/types';
+
+const paymentBadge: Record<PaymentStatus, { label: string; variant: BadgeProps['variant'] }> = {
+  pending: { label: 'Payment pending', variant: 'warn' },
+  paid: { label: 'Paid', variant: 'success' },
+  failed: { label: 'Payment failed', variant: 'danger' },
+  refunded: { label: 'Refunded', variant: 'neutral' },
+};
+
+function paymentBadgeVariant(status: PaymentStatus | undefined): BadgeProps['variant'] {
+  return paymentBadge[status ?? 'pending'].variant;
+}
+
+function paymentBadgeLabel(status: PaymentStatus | undefined): string {
+  return paymentBadge[status ?? 'pending'].label;
+}
 
 export default function OrderDetailPage() {
   const { orderId } = useParams<{ orderId: string }>();
@@ -31,7 +48,7 @@ export default function OrderDetailPage() {
     return (
       <ErrorState
         title="Order not found"
-        description="This invoice is not in the demo database."
+        description="We could not find this order on your account."
         onRetry={() => void orderQuery.refetch()}
       />
     );
@@ -83,8 +100,8 @@ export default function OrderDetailPage() {
             <p className="font-display text-base font-bold text-forest">Invoice</p>
             <p className="text-charcoal-600">{invoiceNumber(order)}</p>
             <p className="text-charcoal-500">Raised {formatDate(order.createdAt)}</p>
-            <Badge variant={payment?.status === 'simulated' ? 'warn' : 'soft'} className="mt-2">
-              {payment?.status === 'simulated' ? 'Payment simulated' : 'Payment pending'}
+            <Badge variant={paymentBadgeVariant(payment?.status)} className="mt-2">
+              {paymentBadgeLabel(payment?.status)}
             </Badge>
           </div>
         </header>
@@ -185,8 +202,8 @@ export default function OrderDetailPage() {
               {formatDateTime(payment.createdAt)}
             </p>
             <p className="mt-1">
-              Reference {payment.gatewayRef}. This demo records the payment as{' '}
-              <strong>simulated</strong> — no Razorpay keys and no money moved.
+              Reference {payment.gatewayRef || '—'}. Payment status:{' '}
+              <strong className="font-medium text-forest">{payment.status}</strong>.
             </p>
           </div>
         )}
@@ -198,8 +215,8 @@ export default function OrderDetailPage() {
         )}
 
         <p className="mt-6 border-t border-forest/10 pt-4 text-[11px] leading-relaxed text-charcoal-400">
-          This is a demo invoice for a simulated order. Guidance from Happy Paw&apos;s
-          veterinary-nutritionist is nutrition guidance, not veterinary treatment.
+          Guidance from Happy Paw&apos;s veterinary-nutritionist is nutrition guidance, not
+          veterinary treatment.
         </p>
       </article>
 

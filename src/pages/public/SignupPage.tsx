@@ -53,7 +53,7 @@ export default function SignupPage() {
           ? 'Next step: add your dog and confirm the portion.'
           : 'Your account is ready. Add your first dog to build a plan.',
       });
-      navigate('/', { replace: true });
+      navigate(roleHome(next.user.role), { replace: true });
     } catch (error) {
       setAuthError(error instanceof Error ? error.message : 'Could not create your account.');
     }
@@ -217,7 +217,7 @@ export default function SignupPage() {
             )}
           </Button>
           <p className="text-center text-[10.5px] leading-relaxed text-charcoal-400">
-            Demo build: your account is stored in this browser only. Nothing is sent to a server.
+            Creating an account is free. Card details are collected later, at checkout.
           </p>
         </form>
       </AuthShell>

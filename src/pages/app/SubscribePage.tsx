@@ -18,7 +18,7 @@ import { SEO } from '@/components/shared/SEO';
 import { EmptyState, ErrorState } from '@/components/shared/EmptyState';
 import { PortalHeader } from '@/components/app/StatusBadges';
 import { AddressFormDialog } from '@/components/app/AddressFormDialog';
-import { SimulatedCheckoutDialog } from '@/components/app/SimulatedCheckoutDialog';
+import { OnlineCheckoutDialog } from '@/components/app/OnlineCheckoutDialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input, Textarea } from '@/components/ui/input';
@@ -37,7 +37,7 @@ import { deliverySchedule } from '@/config/pricing';
 import { formatDate, formatINR } from '@/lib/format';
 import { addDays, toIsoDate, upcomingDeliveryDate } from '@/lib/dates';
 import { dailyPortion, recommendedPlan } from '@/lib/portal';
-import type { CouponValidation, Plan, SimulatedCheckoutResult, Address } from '@/data/types';
+import type { CheckoutResult, CouponValidation, Plan, Address } from '@/data/types';
 
 const steps = ['Dog', 'Plan', 'Delivery', 'Review'];
 
@@ -64,7 +64,7 @@ export default function SubscribePage() {
   const [couponError, setCouponError] = useState<string | null>(null);
   const [notes, setNotes] = useState('');
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [result, setResult] = useState<SimulatedCheckoutResult | null>(null);
+  const [result, setResult] = useState<CheckoutResult | null>(null);
 
   const dogs = useMemo(() => dogsQuery.data ?? [], [dogsQuery.data]);
   const plans = useMemo(
@@ -179,7 +179,7 @@ export default function SubscribePage() {
     return (
       <ErrorState
         title="Checkout is unavailable"
-        description="The demo catalogue did not load."
+        description="The catalogue did not load. Please try again."
         onRetry={() => {
           void dogsQuery.refetch();
           void plansQuery.refetch();
@@ -198,7 +198,7 @@ export default function SubscribePage() {
       <PortalHeader
         eyebrow="Checkout"
         title="Build your weekly box"
-        description={`${deliverySchedule.summary} Payment is simulated — no money moves in this demo.`}
+        description={`${deliverySchedule.summary} The first payment is recorded as pending and confirmed before delivery.`}
       />
 
       <ol className="mb-6 grid grid-cols-4 gap-2" aria-label="Checkout progress">
@@ -444,7 +444,8 @@ export default function SubscribePage() {
                     </p>
                   )}
                   <FieldHint>
-                    Demo coupons: FIRSTPAW (15% off), HYD100 (₹100 off), VETLOVE (10% off).
+                    Try <code className="font-medium">FIRSTBOX</code> for your first box, or{' '}
+                    <code className="font-medium">HYDERABAD150</code> on orders over ₹999.
                   </FieldHint>
 
                   <div className="mt-4">
@@ -518,7 +519,7 @@ export default function SubscribePage() {
                   className="mt-5 w-full"
                   onClick={() => setCheckoutOpen(true)}
                 >
-                  Pay {formatINR(total)} — simulated
+                  Pay {formatINR(total)} — UPI / Card
                 </Button>
               </section>
             )}
@@ -595,7 +596,7 @@ export default function SubscribePage() {
         onSaved={(saved: Address) => setAddressId(saved.id)}
       />
 
-      <SimulatedCheckoutDialog
+      <OnlineCheckoutDialog
         open={checkoutOpen}
         onOpenChange={setCheckoutOpen}
         amountInr={total}
@@ -665,7 +666,7 @@ function PlanOption({
   );
 }
 
-function CheckoutSuccess({ result }: { result: SimulatedCheckoutResult }) {
+function CheckoutSuccess({ result }: { result: CheckoutResult }) {
   const renewal = toIsoDate(addDays(new Date(`${result.order.deliveryDate}T00:00:00`), 7));
   return (
     <>
@@ -681,7 +682,8 @@ function CheckoutSuccess({ result }: { result: SimulatedCheckoutResult }) {
           <p className="mt-2 text-sm leading-relaxed text-charcoal-600">
             {result.subscription.plan.name} for {result.subscription.dog.name}. Payment{' '}
             {formatINR(result.payment.amountInr)} recorded as{' '}
-            <span className="font-medium text-forest">simulated</span> — nothing was charged.
+            <span className="font-medium text-forest">pending</span> — the payment will be
+            confirmed before your first delivery.
           </p>
 
           <dl className="mt-6 grid gap-3 text-left text-sm sm:grid-cols-2">

@@ -5,6 +5,7 @@ import { brand } from '@/config/brand';
 import { images } from '@/config/assets';
 import { Button } from '@/components/ui/button';
 import { StatCounter } from '@/components/shared/StatCounter';
+import { useWeeklyMenu } from '@/hooks/useCatalog';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -21,6 +22,8 @@ export function HeroSection() {
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -38]);
   const cardsY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -72]);
+  const { data: weeklyMenu } = useWeeklyMenu();
+  const heroRecipe = weeklyMenu?.recipes[0];
 
   return (
     <section className="grain relative overflow-hidden">
@@ -206,11 +209,13 @@ export function HeroSection() {
                       On the menu this week
                     </p>
                     <p className="mt-1 font-display text-[13.5px] font-bold leading-tight text-forest">
-                      Chicken, Pumpkin &amp; Spinach
+                      {heroRecipe?.name ?? 'Fresh recipe this week'}
                     </p>
                   </div>
                   <div className="shrink-0 rounded-xl bg-sage-100 px-2.5 py-1.5 text-center">
-                    <p className="font-display text-[15px] font-extrabold leading-none text-forest">128</p>
+                    <p className="font-display text-[15px] font-extrabold leading-none text-forest">
+                      {heroRecipe?.caloriesPer100g ?? '—'}
+                    </p>
                     <p className="mt-0.5 text-[9px] font-medium uppercase tracking-wide text-forest-500">
                       kcal/100g
                     </p>

@@ -1,6 +1,16 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import App from '@/App';
+
+vi.mock('@/data', async (importOriginal) => {
+  const { fakeDataClient } = await import('@/test/fakeDataClient');
+  const actual = await importOriginal<typeof import('@/data')>();
+  return {
+    ...actual,
+    dataClient: fakeDataClient,
+    subscribeAuthState: () => () => undefined,
+  };
+});
 
 /** Public-site smoke test: the landing page renders its hero and key sections. */
 describe('public site smoke test', () => {

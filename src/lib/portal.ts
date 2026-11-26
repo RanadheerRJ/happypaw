@@ -72,6 +72,8 @@ export const subscriptionStatusMeta: Record<
   paused: { label: 'Paused', tone: 'warn' },
   cancelled: { label: 'Cancelled', tone: 'neutral' },
   past_due: { label: 'Payment due', tone: 'danger' },
+  trial: { label: 'Trial', tone: 'warn' },
+  expired: { label: 'Expired', tone: 'neutral' },
 };
 
 export const ticketStatusMeta: Record<
@@ -82,6 +84,7 @@ export const ticketStatusMeta: Record<
   in_progress: { label: 'In progress', tone: 'accent' },
   resolved: { label: 'Resolved', tone: 'success' },
   closed: { label: 'Closed', tone: 'neutral' },
+  waiting_on_user: { label: 'Waiting on you', tone: 'accent' },
 };
 
 export function dogAgeLabel(dob: string): string {

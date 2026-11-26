@@ -99,7 +99,7 @@ export default function SupportPage() {
       ) : ticketsQuery.isError ? (
         <ErrorState
           title="Could not load your tickets"
-          description="The demo database did not respond."
+          description="We could not load your tickets. Please try again."
           onRetry={() => void ticketsQuery.refetch()}
         />
       ) : tickets.length === 0 ? (

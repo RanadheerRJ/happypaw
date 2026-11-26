@@ -49,7 +49,7 @@ export default function SubscriptionsPage() {
       ) : subscriptionsQuery.isError ? (
         <ErrorState
           title="Could not load subscriptions"
-          description="The demo database did not respond."
+          description="We could not load your subscriptions. Please try again."
           onRetry={() => void subscriptionsQuery.refetch()}
         />
       ) : subscriptions.length === 0 ? (

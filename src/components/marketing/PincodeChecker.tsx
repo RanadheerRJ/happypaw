@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
@@ -28,6 +28,11 @@ export function PincodeChecker({
   const check = useCheckPincode();
   const waitlist = useJoinWaitlist();
   const [result, setResult] = useState<PincodeCheckResult | null>(null);
+  // Unique ids — the component can render more than once on a page.
+  const baseId = useId();
+  const pincodeId = `${baseId}-pincode`;
+  const waitlistEmailId = `${baseId}-waitlist-email`;
+  const pincodeErrorId = `${baseId}-pincode-error`;
 
   const checkForm = useForm<CheckValues>({
     resolver: zodResolver(pincodeCheckSchema),
@@ -86,16 +91,16 @@ export function PincodeChecker({
       </div>
 
       <form onSubmit={checkForm.handleSubmit(onCheck)} className="mt-5" noValidate>
-        <Label htmlFor="pincode-check">Pincode</Label>
+        <Label htmlFor={pincodeId}>Pincode</Label>
         <div className="mt-1.5 flex gap-2">
           <Input
-            id="pincode-check"
+            id={pincodeId}
             inputMode="numeric"
             autoComplete="postal-code"
             placeholder="e.g. 500081"
             maxLength={6}
             aria-invalid={Boolean(errors.pincode) || undefined}
-            aria-describedby={errors.pincode ? 'pincode-check-error' : undefined}
+            aria-describedby={errors.pincode ? pincodeErrorId : undefined}
             className={cn('max-w-[170px] tracking-[0.18em]')}
             {...checkForm.register('pincode')}
           />
@@ -109,7 +114,7 @@ export function PincodeChecker({
             )}
           </Button>
         </div>
-        <FieldError id="pincode-check-error">{errors.pincode?.message}</FieldError>
+        <FieldError id={pincodeErrorId}>{errors.pincode?.message}</FieldError>
       </form>
 
       <div aria-live="polite" className="mt-4">
@@ -150,11 +155,11 @@ export function PincodeChecker({
             ) : (
               <form onSubmit={waitForm.handleSubmit(onJoin)} className="mt-3 space-y-2" noValidate>
                 <div>
-                  <Label htmlFor="waitlist-email" className="sr-only">
+                  <Label htmlFor={waitlistEmailId} className="sr-only">
                     Email address
                   </Label>
                   <Input
-                    id="waitlist-email"
+                    id={waitlistEmailId}
                     type="email"
                     placeholder="you@example.com"
                     autoComplete="email"

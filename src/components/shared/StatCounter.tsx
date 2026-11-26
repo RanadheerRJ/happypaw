@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useInView, useReducedMotion } from 'framer-motion';
 
 /**
- * Animated count-up on view. Numbers are illustrative demo figures — the
- * surrounding copy says so, and reduced-motion users see the final value.
+ * Animated count-up on view. Reduced-motion users see the final value
+ * immediately, and the animated value is clamped so it never overshoots the
+ * target in either direction.
  */
 export function StatCounter({
   value,
@@ -42,10 +43,13 @@ export function StatCounter({
     return () => cancelAnimationFrame(frame);
   }, [inView, reduce, value, duration]);
 
+  // Clamp the animated value to the target range so negative targets never
+  // overshoot below the final figure and positives never exceed it.
+  const clamped = display < 0 ? Math.max(display, value) : Math.min(display, value);
   const formatted = new Intl.NumberFormat('en-IN', {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
-  }).format(display);
+  }).format(clamped);
 
   return (
     <span ref={ref} className={className}>
