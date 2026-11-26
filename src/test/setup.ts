@@ -42,6 +42,13 @@ Object.defineProperty(window, 'matchMedia', {
 
 Object.defineProperty(window, 'scrollTo', { writable: true, value: vi.fn() });
 
+// jsdom has no WebGL. Stub getContext so WebGL detection (useWebGLAvailable)
+// resolves to false cleanly instead of logging "Not implemented" errors.
+Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+  writable: true,
+  value: vi.fn(() => null),
+});
+
 beforeEach(() => {
   window.localStorage.clear();
   window.sessionStorage.clear();

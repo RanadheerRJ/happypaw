@@ -1,6 +1,7 @@
 import { Flame, Leaf, WheatOff } from 'lucide-react';
 import type { Recipe } from '@/data/types';
 import { Badge } from '@/components/ui/badge';
+import { TiltCard } from '@/components/shared/TiltCard';
 import { cn } from '@/lib/utils';
 import { titleCase } from '@/lib/utils';
 
@@ -18,12 +19,12 @@ export function RecipeCard({
   const hasAllergens = recipe.allergens.length > 0;
 
   return (
-    <article
-      className={cn(
-        'group flex h-full flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card',
-        className,
-      )}
-    >
+    <TiltCard className={className} max={6}>
+      <article
+        className={cn(
+          'group flex h-full flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card',
+        )}
+      >
       <div className="relative aspect-[4/3] overflow-hidden bg-cream-200">
         <img
           src={recipe.photoUrl}
@@ -85,5 +86,6 @@ export function RecipeCard({
         )}
       </div>
     </article>
+    </TiltCard>
   );
 }

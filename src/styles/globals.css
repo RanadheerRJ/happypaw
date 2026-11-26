@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --cream: 251 247 240;
-    --forest: 31 61 43;
-    --terracotta: 217 108 63;
-    --sage: 168 195 160;
-    --charcoal: 43 43 43;
+    --cream: 250 246 238;
+    --forest: 20 64 47;
+    --terracotta: 224 106 59;
+    --sage: 157 191 160;
+    --charcoal: 42 42 40;
     color-scheme: light;
   }
 

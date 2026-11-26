@@ -3,6 +3,7 @@ import { Check, PawPrint } from 'lucide-react';
 import type { Plan } from '@/data/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { TiltCard } from '@/components/shared/TiltCard';
 import { formatINR } from '@/lib/format';
 import { perDayPrice } from '@/config/pricing';
 import { cn } from '@/lib/utils';
@@ -110,7 +111,7 @@ export function PlanCard({
   );
 
   return (
-    <div
+    <TiltCard
       className={cn(
         'relative flex h-full flex-col rounded-3xl border bg-white p-5 shadow-soft transition-all duration-300 sm:p-6',
         selected
@@ -127,6 +128,6 @@ export function PlanCard({
         />
       )}
       {body}
-    </div>
+    </TiltCard>
   );
 }
