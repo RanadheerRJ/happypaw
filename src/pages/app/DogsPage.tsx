@@ -51,7 +51,7 @@ export default function DogsPage() {
       ) : dogsQuery.isError ? (
         <ErrorState
           title="Could not load your dogs"
-          description="The demo database did not respond."
+          description="We could not load your dogs. Please try again."
           onRetry={() => void dogsQuery.refetch()}
         />
       ) : dogs.length === 0 ? (

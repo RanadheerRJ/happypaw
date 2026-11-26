@@ -29,7 +29,11 @@ export function formatPricePerDay(priceInr: number, durationDays: number): strin
 }
 
 export function parseDate(value: string | Date): Date {
-  return value instanceof Date ? value : new Date(`${value}T00:00:00`);
+  if (value instanceof Date) return value;
+  // Full ISO timestamps (e.g. "2026-11-26T17:01:50.414318+00") must not get the
+  // date-only "T00:00:00" suffix appended — that produces an Invalid Date.
+  if (/^\d{4}-\d{2}-\d{2}T/i.test(value)) return new Date(value);
+  return new Date(`${value}T00:00:00`);
 }
 
 export function formatDate(value: string | Date, opts?: Intl.DateTimeFormatOptions): string {

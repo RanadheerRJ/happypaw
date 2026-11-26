@@ -99,7 +99,7 @@ export default function SubscriptionDetailPage() {
     return (
       <ErrorState
         title="Subscription not found"
-        description="This subscription is not in the demo database."
+        description="We could not find this subscription."
         onRetry={() => void subscriptionQuery.refetch()}
       />
     );

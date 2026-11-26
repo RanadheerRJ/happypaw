@@ -59,8 +59,8 @@ export default function ForgotPasswordPage() {
             </span>
             <h2 className="mt-3 font-display text-lg font-bold text-emerald-900">Check your inbox</h2>
             <p className="mt-2 text-[12.5px] leading-relaxed text-emerald-800">
-              If an account exists for that email, a reset link is on its way. In this demo build no
-              email is sent — mock mode simply confirms the request.
+              If an account exists for that email, a reset link is on its way. For your security we
+              never confirm which addresses are registered.
             </p>
             <Button
               variant="outline"

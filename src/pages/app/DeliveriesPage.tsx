@@ -65,7 +65,7 @@ export default function DeliveriesPage() {
       ) : ordersQuery.isError ? (
         <ErrorState
           title="Could not load deliveries"
-          description="The demo database did not respond."
+          description="We could not load your deliveries. Please try again."
           onRetry={() => void ordersQuery.refetch()}
         />
       ) : (

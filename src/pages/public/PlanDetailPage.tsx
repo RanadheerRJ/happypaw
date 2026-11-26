@@ -282,8 +282,7 @@ export default function PlanDetailPage() {
                 </Link>
               </Button>
               <p className="mt-3 text-center text-[11px] leading-relaxed text-charcoal-400">
-                No payment is taken in this demo. You will choose your dog and confirm the portion
-                first.
+                No payment is taken yet. You will choose your dog and confirm the portion first.
               </p>
             </div>
 

@@ -1,11 +1,21 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { RequireRole } from '@/features/auth/RequireRole';
 import { dataClient } from '@/data';
-import { resetDb } from '@/data/mock/db';
+import { resetFakeDb, signInAsRole } from '@/test/fakeDataClient';
+
+vi.mock('@/data', async (importOriginal) => {
+  const { fakeDataClient } = await import('@/test/fakeDataClient');
+  const actual = await importOriginal<typeof import('@/data')>();
+  return {
+    ...actual,
+    dataClient: fakeDataClient,
+    subscribeAuthState: () => () => undefined,
+  };
+});
 
 function renderRoute(initialPath: string) {
   const queryClient = new QueryClient({
@@ -45,7 +55,7 @@ function renderRoute(initialPath: string) {
 describe('role guards', () => {
   beforeEach(async () => {
     window.localStorage.clear();
-    resetDb();
+    resetFakeDb();
     await dataClient.auth.signOut().catch(() => undefined);
   });
 
@@ -55,25 +65,25 @@ describe('role guards', () => {
   });
 
   it('allows a customer into the customer portal', async () => {
-    await dataClient.auth.signInAsDemo('customer');
+    await signInAsRole('customer');
     renderRoute('/app');
     expect(await screen.findByText('customer area')).toBeInTheDocument();
   });
 
   it('sends a customer away from the vet portal to 403', async () => {
-    await dataClient.auth.signInAsDemo('customer');
+    await signInAsRole('customer');
     renderRoute('/vet');
     expect(await screen.findByText('forbidden screen')).toBeInTheDocument();
   });
 
   it('allows a vet into the vet portal', async () => {
-    await dataClient.auth.signInAsDemo('vet');
+    await signInAsRole('vet');
     renderRoute('/vet');
     expect(await screen.findByText('vet area')).toBeInTheDocument();
   });
 
   it('sends a vet away from the customer portal', async () => {
-    await dataClient.auth.signInAsDemo('vet');
+    await signInAsRole('vet');
     renderRoute('/app');
     expect(await screen.findByText('forbidden screen')).toBeInTheDocument();
   });

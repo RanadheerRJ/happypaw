@@ -11,7 +11,7 @@ export default function PortalNotFoundPage() {
       <EmptyState
         icon={Compass}
         title="That page is not in the portal"
-        description="The link may be old, or the record may have been removed from the demo database."
+        description="The link may be old, or the record may no longer exist."
         action={
           <Button asChild>
             <Link to="/app">

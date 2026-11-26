@@ -11,6 +11,7 @@ import { Input, Textarea } from '@/components/ui/input';
 import { Label, FieldError, FieldHint } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
 import { contactSchema, type ContactFormValues } from '@/lib/validators';
+import { dataClient } from '@/data';
 import { brand } from '@/config/brand';
 
 const topicOptions = [
@@ -34,13 +35,22 @@ export default function ContactPage() {
   });
 
   async function onSubmit(values: ContactFormValues) {
-    // Demo build: nothing is sent anywhere. Simulated latency shows the pending state.
-    await new Promise((resolve) => setTimeout(resolve, 650));
-    setSubmitted(true);
-    toast.success('Message queued (demo)', {
-      description: `Nothing was sent — this build has no backend for contact messages.`,
-    });
-    form.reset({ ...values, message: '' });
+    try {
+      await dataClient.contact.submit({
+        name: values.name,
+        email: values.email,
+        phone: values.phone || null,
+        topic: values.topic,
+        message: values.message,
+      });
+      setSubmitted(true);
+      toast.success('Message sent', {
+        description: 'Thanks — we have your message and will reply within one working day.',
+      });
+      form.reset({ ...values, message: '' });
+    } catch {
+      toast.error('Could not send your message. Please try again.');
+    }
   }
 
   return (
@@ -74,8 +84,9 @@ export default function ContactPage() {
                   Thank you — message recorded
                 </h2>
                 <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-emerald-800">
-                  In this demo build nothing is actually sent. In production this would create a
-                  support ticket and email our team.
+                  Your message has been recorded and our team will reply to{' '}
+                  <strong className="font-semibold">{form.getValues('email')}</strong> within one
+                  working day.
                 </p>
                 <Button variant="outline" className="mt-5 bg-white" onClick={() => setSubmitted(false)}>
                   Send another message
@@ -172,7 +183,7 @@ export default function ContactPage() {
                   )}
                 </Button>
                 <p className="mt-3 text-center text-[11px] text-charcoal-400">
-                  Demo build — messages are not delivered and no data leaves your browser.
+                  We reply within one working day. Your details are used only to answer your message.
                 </p>
               </form>
             )}

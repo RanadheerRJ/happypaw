@@ -4,7 +4,7 @@
  */
 
 export type Role = 'customer' | 'vet' | 'admin';
-export type DataMode = 'mock' | 'supabase';
+export type DataMode = 'supabase';
 
 export type WeightBand = 'small' | 'medium' | 'large' | 'topper' | 'special';
 
@@ -86,6 +86,15 @@ export interface WaitlistEntry {
   createdAt: string;
 }
 
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  topic: string;
+  message: string;
+}
+
 export interface Profile {
   id: string;
   role: Role;
@@ -165,7 +174,13 @@ export interface DogWeight {
   recordedAt: string;
 }
 
-export type SubscriptionStatus = 'active' | 'paused' | 'cancelled' | 'past_due';
+export type SubscriptionStatus =
+  | 'trial'
+  | 'active'
+  | 'paused'
+  | 'cancelled'
+  | 'expired'
+  | 'past_due';
 
 export interface Subscription {
   id: string;
@@ -231,7 +246,7 @@ export interface OrderWithItems extends Order {
   payment: Payment | null;
 }
 
-export type PaymentStatus = 'simulated' | 'pending' | 'refunded';
+export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded';
 
 export interface Payment {
   id: string;
@@ -244,7 +259,7 @@ export interface Payment {
   createdAt: string;
 }
 
-export type TicketStatus = 'open' | 'in_progress' | 'resolved' | 'closed';
+export type TicketStatus = 'open' | 'in_progress' | 'waiting_on_user' | 'resolved' | 'closed';
 export type TicketPriority = 'low' | 'normal' | 'high';
 
 export interface SupportTicket {
@@ -392,7 +407,7 @@ export interface CreateSubscriptionInput {
   notes?: string | null;
 }
 
-export interface SimulatedCheckoutResult {
+export interface CheckoutResult {
   subscription: SubscriptionWithDetails;
   order: OrderWithItems;
   payment: Payment;

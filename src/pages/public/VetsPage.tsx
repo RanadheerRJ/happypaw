@@ -66,7 +66,7 @@ export default function VetsPage() {
             No cost to join
           </Badge>
           <Badge variant="soft" className="py-1.5 normal-case tracking-normal">
-            Demo programme
+            Vet partner programme
           </Badge>
         </div>
       </PageHero>
@@ -171,8 +171,9 @@ export default function VetsPage() {
                   Referral rewards
                 </h3>
                 <p className="mt-1 max-w-xl text-[12.5px] leading-relaxed text-charcoal-600">
-                  Rewards are agreed per clinic and settled monthly against your referral log. In
-                  this demo build, earnings and payouts are simulated and no money changes hands.
+                  Rewards are agreed per clinic and settled monthly against your referral log.
+                  Payouts happen through a standard payout channel once your clinic agreement is in
+                  place.
                 </p>
               </div>
               <Button asChild variant="outline" className="shrink-0 bg-white">
@@ -202,8 +203,11 @@ export default function VetsPage() {
               </Button>
             </div>
             <p className="mt-4 text-[11.5px] text-charcoal-500">
-              Demo vet account: <code className="rounded bg-cream-200 px-1.5 py-0.5">meera@happypaw.in</code>{' '}
-              · password <code className="rounded bg-cream-200 px-1.5 py-0.5">Demo@1234</code>
+              Vet partners get a dedicated clinic email to sign in with. Not a vet yet?{' '}
+              <Link to="/contact?topic=vet" className="font-semibold text-forest underline decoration-sage-400 underline-offset-4">
+                Apply to partner
+              </Link>
+              .
             </p>
           </div>
           <div className="rounded-2xl border border-forest/10 bg-cream-50 p-5">
@@ -222,7 +226,7 @@ export default function VetsPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-[10.5px] text-charcoal-400">Illustrative demo figures.</p>
+            <p className="mt-3 text-[10.5px] text-charcoal-400">Dashboard preview — your numbers appear here after sign-in.</p>
           </div>
         </div>
       </section>

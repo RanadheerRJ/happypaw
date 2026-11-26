@@ -2,9 +2,7 @@ import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/marketing/Header';
 import { Footer } from '@/components/marketing/Footer';
-import { DemoBanner } from '@/components/shared/DemoBanner';
 import { PageTransition } from '@/components/shared/Reveal';
-import { DemoSwitcher } from '@/components/shared/DemoSwitcher';
 import { RouteFallback } from '@/components/shared/RouteFallback';
 
 export function PublicLayout() {
@@ -23,7 +21,6 @@ export function PublicLayout() {
       <a href="#main-content" onClick={handleSkip} className="skip-link">
         Skip to content
       </a>
-      <DemoBanner />
       <Header />
       <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
         <Suspense fallback={<RouteFallback />}>
@@ -33,7 +30,6 @@ export function PublicLayout() {
         </Suspense>
       </main>
       <Footer />
-      <DemoSwitcher />
     </div>
   );
 }

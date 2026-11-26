@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { AlertCircle, ArrowRight, Eye, EyeOff, Loader2, ShieldCheck } from 'lucide-react';
+import { AlertCircle, ArrowRight, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { SEO } from '@/components/shared/SEO';
 import { AuthShell } from '@/features/auth/AuthShell';
@@ -11,23 +11,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label, FieldError } from '@/components/ui/label';
 import { loginSchema, type LoginFormValues } from '@/lib/validators';
-import { demoAccounts } from '@/data/fixtures/demoUsers';
-import { env } from '@/config/env';
-import type { Role } from '@/data/types';
-
-const demoRoles: { role: Role; label: string; description: string }[] = [
-  { role: 'customer', label: 'Customer', description: 'Priya · 2 dogs' },
-  { role: 'vet', label: 'Veterinarian', description: 'Dr. Meera · clinic' },
-  { role: 'admin', label: 'Owner', description: 'Rohan · admin' },
-];
 
 export default function LoginPage() {
-  const { signIn, signInAsDemo, session, loading } = useAuth();
+  const { signIn, session, loading } = useAuth();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
-  const [demoPending, setDemoPending] = useState<Role | null>(null);
 
   const rawNext = params.get('next');
   const safeNext = rawNext && rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext : null;
@@ -53,22 +43,6 @@ export default function LoginPage() {
       const message =
         error instanceof Error ? error.message : 'Could not sign you in. Please try again.';
       setAuthError(message);
-    }
-  }
-
-  async function onDemo(role: Role) {
-    setAuthError(null);
-    setDemoPending(role);
-    try {
-      const next = await signInAsDemo(role);
-      toast.success(`Signed in as ${next.user.fullName}`, {
-        description: `Demo ${role} account`,
-      });
-      navigate(safeNext ?? roleHome(next.user.role), { replace: true });
-    } catch (error) {
-      setAuthError(error instanceof Error ? error.message : 'Demo sign-in failed.');
-    } finally {
-      setDemoPending(null);
     }
   }
 
@@ -158,63 +132,6 @@ export default function LoginPage() {
             )}
           </Button>
         </form>
-
-        {env.demoMode && (
-          <>
-            <div className="my-6 flex items-center gap-3">
-              <span className="h-px flex-1 bg-forest/10" />
-              <span className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-charcoal-400">
-                Demo accounts
-              </span>
-              <span className="h-px flex-1 bg-forest/10" />
-            </div>
-
-            <div className="grid gap-2 sm:grid-cols-3">
-              {demoRoles.map((item) => (
-                <button
-                  key={item.role}
-                  type="button"
-                  onClick={() => void onDemo(item.role)}
-                  disabled={demoPending !== null}
-                  className="rounded-2xl border border-forest/15 bg-white px-3 py-2.5 text-left transition-all hover:-translate-y-0.5 hover:border-forest/30 hover:shadow-soft disabled:opacity-60"
-                >
-                  <span className="flex items-center gap-1.5 font-display text-[12.5px] font-bold text-forest">
-                    {demoPending === item.role ? (
-                      <Loader2 className="h-3 w-3 animate-spin" aria-hidden="true" />
-                    ) : null}
-                    {item.label}
-                  </span>
-                  <span className="mt-0.5 block text-[10.5px] leading-snug text-charcoal-500">
-                    {item.description}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <details className="mt-3 rounded-xl border border-forest/10 bg-cream-50 px-3.5 py-2.5">
-              <summary className="cursor-pointer text-[11.5px] font-medium text-charcoal-600">
-                Seeded demo credentials
-              </summary>
-              <ul className="mt-2 space-y-1 text-[11px] text-charcoal-500">
-                {Object.entries(demoAccounts)
-                  .filter(([key]) => key !== 'customerAlt')
-                  .map(([key, account]) => (
-                    <li key={key} className="flex flex-wrap items-center gap-x-2">
-                      <span className="capitalize">{account.label}:</span>
-                      <code className="rounded bg-white px-1.5 py-0.5">{account.email}</code>
-                      <span className="text-charcoal-400">/</span>
-                      <code className="rounded bg-white px-1.5 py-0.5">{account.password}</code>
-                    </li>
-                  ))}
-              </ul>
-            </details>
-
-            <p className="mt-3 flex items-start gap-1.5 text-[10.5px] leading-relaxed text-charcoal-400">
-              <ShieldCheck className="mt-0.5 h-3 w-3 shrink-0" aria-hidden="true" />
-              Demo data only. Mock sign-in stores a session in your browser — never a real credential.
-            </p>
-          </>
-        )}
       </AuthShell>
     </>
   );

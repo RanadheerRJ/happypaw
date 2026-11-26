@@ -147,7 +147,9 @@ export default function SettingsPage() {
     navigate('/', { replace: true });
   }
 
-  if (profileQuery.isLoading) {
+  // Wait for the profile query to settle — a disabled query (no session yet)
+  // reports isLoading: false with no data, so gate on the data itself.
+  if (profileQuery.isLoading || (!profileQuery.data && !profileQuery.isError)) {
     return (
       <div aria-busy="true" className="space-y-4">
         <Skeleton className="h-9 w-56" />
@@ -161,7 +163,7 @@ export default function SettingsPage() {
     return (
       <ErrorState
         title="Could not load settings"
-        description="The demo database did not respond."
+        description="We could not load your settings. Please try again."
         onRetry={() => void profileQuery.refetch()}
       />
     );
@@ -176,7 +178,7 @@ export default function SettingsPage() {
       <PortalHeader
         eyebrow="Settings"
         title="Your account"
-        description="Profile, notification preferences and security. Changes save to the demo database."
+        description="Profile, notification preferences and security. Changes save to your live account."
       />
 
       <Tabs defaultValue="profile" className="max-w-3xl">
@@ -237,7 +239,7 @@ export default function SettingsPage() {
                     disabled
                   />
                   <FieldHint>
-                    Email changes need identity verification — contact support in this demo.
+                    Email changes need identity verification — contact support to update it.
                   </FieldHint>
                 </div>
               </div>
@@ -410,7 +412,7 @@ export default function SettingsPage() {
             </div>
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <FieldHint>
-                Demo accounts all start with <code className="font-medium">Demo@1234</code>.
+                Your current password is required to make this change.
               </FieldHint>
               <Button onClick={() => void savePassword()} disabled={changePassword.isPending}>
                 {changePassword.isPending && (
@@ -426,7 +428,7 @@ export default function SettingsPage() {
           <section className="rounded-3xl border border-red-200 bg-red-50/60 p-5">
             <h2 className="font-display text-base font-bold text-red-800">Delete my account</h2>
             <p className="mt-2 text-sm leading-relaxed text-red-800/90">
-              This marks your demo account as deleted and signs you out. Active subscriptions stop,
+              This marks your account as deleted and signs you out. Active subscriptions stop,
               but order records stay for accounting. You cannot undo this from the UI.
             </p>
             <Button
@@ -458,7 +460,7 @@ export default function SettingsPage() {
           if (!open) setDeleteConfirm('');
         }}
         title="Delete this account?"
-        description="Type DELETE to confirm. Your demo profile will be marked deleted and you will be signed out."
+        description="Type DELETE to confirm. Your profile will be marked deleted and you will be signed out."
         confirmLabel="Delete my account"
         tone="danger"
         pending={deleteAccount.isPending}

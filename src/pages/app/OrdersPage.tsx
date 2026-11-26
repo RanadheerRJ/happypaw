@@ -68,7 +68,7 @@ export default function OrdersPage() {
       ) : ordersQuery.isError ? (
         <ErrorState
           title="Could not load orders"
-          description="The demo database did not respond."
+          description="We could not load your orders. Please try again."
           onRetry={() => void ordersQuery.refetch()}
         />
       ) : visible.length === 0 ? (

@@ -1,29 +1,37 @@
 import { useEffect, useState } from 'react';
-import { CheckCircle2, CreditCard, Loader2, Lock, ShieldCheck, Smartphone } from 'lucide-react';
+import { CheckCircle2, CreditCard, Loader2, Lock, Smartphone } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { formatINR } from '@/lib/format';
 
 const methods = [
-  { id: 'upi', label: 'UPI', hint: 'priya@okhdfcbank', icon: Smartphone },
-  { id: 'card', label: 'Card', hint: '•••• 4242', icon: CreditCard },
-  { id: 'netbanking', label: 'Net banking', hint: 'HDFC Bank', icon: Lock },
+  { id: 'upi', label: 'UPI', hint: '@yourbank', icon: Smartphone },
+  { id: 'card', label: 'Card', hint: '•••• securely stored', icon: CreditCard },
+  { id: 'netbanking', label: 'Net banking', hint: 'Choose your bank', icon: Lock },
 ] as const;
 
-type SimulationState = 'idle' | 'processing' | 'success';
+type CheckoutState = 'idle' | 'processing' | 'done';
 
 /**
- * Stand-in for the Razorpay modal. It never talks to Razorpay: no SDK, no keys,
- * no network. The adapter records the payment as `status: 'simulated'`.
+ * Placeholder online-payment dialog. It presents the order and a payment-method
+ * picker, then records the checkout through the Supabase checkout RPC, which
+ * stores the payment with status `pending` until the gateway confirms it.
+ * No real money moves until the payment provider is connected.
  */
-export function SimulatedCheckoutDialog({
+export function OnlineCheckoutDialog({
   open,
   onOpenChange,
   amountInr,
   summary,
   onConfirm,
-  confirmLabel = 'Pay now',
+  confirmLabel = 'Confirm payment',
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -32,7 +40,7 @@ export function SimulatedCheckoutDialog({
   onConfirm: () => Promise<void> | void;
   confirmLabel?: string;
 }) {
-  const [step, setStep] = useState<SimulationState>('idle');
+  const [step, setStep] = useState<CheckoutState>('idle');
   const [method, setMethod] = useState<(typeof methods)[number]['id']>('upi');
   const [error, setError] = useState<string | null>(null);
 
@@ -47,9 +55,8 @@ export function SimulatedCheckoutDialog({
     setStep('processing');
     setError(null);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1400));
       await onConfirm();
-      setStep('success');
+      setStep('done');
     } catch (cause) {
       setStep('idle');
       setError(cause instanceof Error ? cause.message : 'Payment could not be completed.');
@@ -62,25 +69,29 @@ export function SimulatedCheckoutDialog({
         <DialogHeader>
           <div className="flex items-center justify-between gap-3">
             <DialogTitle>Complete your payment</DialogTitle>
-            <Badge variant="warn" className="shrink-0">
-              Simulated
+            <Badge variant="warn" className="shrink-0 normal-case tracking-normal">
+              Online payments
             </Badge>
           </div>
           <DialogDescription>
-            Demo checkout only — no Razorpay account, keys or real money are involved. The payment
-            is stored with status <span className="font-medium text-forest">simulated</span>.
+            Your subscription is created and your first delivery is scheduled. The payment is
+            recorded as <span className="font-medium text-forest">pending</span> until confirmed.
           </DialogDescription>
         </DialogHeader>
 
-        {step === 'success' ? (
+        {step === 'done' ? (
           <div className="py-4 text-center" role="status" aria-live="polite">
             <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-emerald-700">
               <CheckCircle2 className="h-7 w-7" aria-hidden="true" />
             </span>
             <p className="mt-4 font-display text-lg font-bold text-forest">
-              Payment simulated successfully
+              Subscription created
             </p>
-            <p className="mt-1 text-sm text-charcoal-600">{formatINR(amountInr)} received (demo).</p>
+            <p className="mt-1 text-sm text-charcoal-600">
+              {formatINR(amountInr)} recorded with status{' '}
+              <span className="font-medium text-forest">pending</span>. We will confirm the payment
+              before your first Sunday delivery.
+            </p>
             <Button className="mt-5 w-full" onClick={() => onOpenChange(false)}>
               Continue
             </Button>
@@ -143,9 +154,9 @@ export function SimulatedCheckoutDialog({
             </fieldset>
 
             <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-charcoal-500">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-forest/70" aria-hidden="true" />
-              This is a simulated gateway. Order, invoice and payment records are created in the
-              demo database so the rest of the flow behaves exactly like production.
+              <Lock className="mt-0.5 h-4 w-4 shrink-0 text-forest/70" aria-hidden="true" />
+              This is a placeholder payment gateway. The checkout is recorded in your account with
+              a pending payment status until the payment provider is connected.
             </p>
 
             {error && (
@@ -170,7 +181,7 @@ export function SimulatedCheckoutDialog({
               )}
             </Button>
             <p className="mt-3 text-center text-[11px] text-charcoal-400">
-              By continuing you agree to the demo terms. Nothing is charged.
+              No payment is captured until the gateway is enabled.
             </p>
           </>
         )}

@@ -1,32 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, RotateCcw } from 'lucide-react';
-import { toast } from 'sonner';
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { brand } from '@/config/brand';
 import { deliveryZoneFixtures, deliverySchedule } from '@/config/pricing';
 import { footerNav } from '@/config/nav';
-import { showDemoChrome } from '@/config/env';
-import { dataClient } from '@/data';
 import { Logo } from '@/components/shared/Logo';
-import { cn } from '@/lib/utils';
 
 export function Footer() {
-  const queryClient = useQueryClient();
   const year = new Date().getFullYear();
-
-  async function handleReset() {
-    try {
-      await dataClient.demo.reset();
-      queryClient.clear();
-      toast.success('Demo data reset', {
-        description: 'Fixtures are back to their original state.',
-      });
-      window.location.hash = '#/';
-      window.location.reload();
-    } catch {
-      toast.error('Could not reset demo data');
-    }
-  }
 
   return (
     <footer className="relative overflow-hidden bg-forest-800 text-cream/75">
@@ -141,20 +121,8 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <span className="rounded-full border border-cream/15 px-2 py-0.5 text-[10.5px] uppercase tracking-widest text-cream/60">
-                Demo build
+                Fresh meals · {brand.city}
               </span>
-              {showDemoChrome && (
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className={cn(
-                    'inline-flex items-center gap-1.5 text-[12px] text-cream/60 underline decoration-cream/25 underline-offset-4 transition-colors hover:text-cream',
-                  )}
-                >
-                  <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Reset demo data
-                </button>
-              )}
             </div>
           </div>
         </div>

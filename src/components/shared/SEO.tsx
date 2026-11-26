@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { brand } from '@/config/brand';
-import { env } from '@/config/env';
 
 interface SEOProps {
   title?: string;
@@ -24,7 +23,7 @@ export function SEO({
   const fullTitle = title ? `${title} · ${brand.name}` : `${brand.name} — ${brand.tagline}`;
   const canonical = `${brand.domain}${path === '/' ? '' : path}`;
   const imageUrl = image.startsWith('http') ? image : `${brand.domain}/${image.replace(/^\//, '')}`;
-  const shouldNoIndex = noIndex ?? env.demoMode;
+  const shouldNoIndex = noIndex ?? false;
   const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (

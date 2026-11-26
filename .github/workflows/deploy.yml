@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: CI / CD to GitHub Pages
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -14,7 +15,43 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  SUPABASE_PROJECT_REF: pghtjewnyogtbbigjanm
+
 jobs:
+  migrate:
+    name: Apply Supabase migrations
+    runs-on: ubuntu-latest
+    # The Supabase CLI needs a personal access token + DB password. The
+    # integration token cannot read Actions secrets, so these are set by the
+    # repo owner in Settings > Secrets and variables. If they are absent the
+    # job skips — the schema is already applied and the build still deploys.
+    if: ${{ secrets.SUPABASE_ACCESS_TOKEN != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase
+
+      - name: Link project
+        working-directory: supabase
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase link --project-ref "$SUPABASE_PROJECT_REF" --token "$SUPABASE_ACCESS_TOKEN"
+
+      - name: Push migrations
+        working-directory: supabase
+        env:
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: supabase db push --force-reset
+
   build:
     name: Lint, typecheck, test, build
     runs-on: ubuntu-latest
@@ -63,15 +100,21 @@ jobs:
       - name: Unit tests
         run: npm run test
 
-      - name: Build (GitHub Pages, mock data, demo mode)
+      - name: Build (live Supabase)
         env:
           # Project pages live at https://<user>.github.io/<repo>/.
-          # For a <user>.github.io repository, set this to "/".
+          # For a <user>.github.io repository, set this to " /".
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
-          VITE_DATA_MODE: mock
-          VITE_DEMO_MODE: 'true'
           VITE_ROUTER_MODE: hash
+          # The anon key is publishable (safe for the browser); the URL is
+          # public. Both can be moved to Settings > Variables if preferred.
+          VITE_SUPABASE_URL: https://pghtjewnyogtbbigjanm.supabase.co
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
         run: |
+          if [ -z "${VITE_SUPABASE_ANON_KEY:-}" ]; then
+            echo "::error::VITE_SUPABASE_ANON_KEY repository variable is not set. Add it in Settings > Variables (publishable key: sb_publishable_d7elpPAe0OBx7-KDCBNDyA_AO_icl6e)."
+            exit 1
+          fi
           npm run build
           touch dist/.nojekyll
 

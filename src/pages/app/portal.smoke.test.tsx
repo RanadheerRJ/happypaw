@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -6,8 +6,17 @@ import { HelmetProvider } from 'react-helmet-async';
 import type { ReactElement } from 'react';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { RequireRole } from '@/features/auth/RequireRole';
-import { resetDb } from '@/data/mock/db';
-import { dataClient } from '@/data';
+import { resetFakeDb, signInAsRole } from '@/test/fakeDataClient';
+
+vi.mock('@/data', async (importOriginal) => {
+  const { fakeDataClient } = await import('@/test/fakeDataClient');
+  const actual = await importOriginal<typeof import('@/data')>();
+  return {
+    ...actual,
+    dataClient: fakeDataClient,
+    subscribeAuthState: () => () => undefined,
+  };
+});
 
 import OverviewPage from '@/pages/app/OverviewPage';
 import DogsPage from '@/pages/app/DogsPage';
@@ -44,7 +53,7 @@ function renderPortal(element: ReactElement, path = '/app', pattern = '/app/*') 
 
 beforeEach(() => {
   window.localStorage.clear();
-  resetDb();
+  resetFakeDb();
 });
 
 describe('customer portal smoke test', () => {
@@ -60,7 +69,7 @@ describe('customer portal smoke test', () => {
   ];
 
   it.each(pages)('renders %s for a signed-in customer', async (path, element, heading) => {
-    await dataClient.auth.signInAsDemo('customer');
+    await signInAsRole('customer');
     renderPortal(element, path);
     expect(await screen.findByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
   });
@@ -86,7 +95,7 @@ describe('role guard', () => {
   });
 
   it('sends the wrong role to the 403 screen', async () => {
-    await dataClient.auth.signInAsDemo('vet');
+    await signInAsRole('vet');
     renderRaw(
       <Routes>
         <Route path="/403" element={<h1>Forbidden screen</h1>} />
@@ -105,7 +114,7 @@ describe('role guard', () => {
   });
 
   it('renders the guarded page for the matching role', async () => {
-    await dataClient.auth.signInAsDemo('customer');
+    await signInAsRole('customer');
     renderRaw(
       <Routes>
         <Route

@@ -269,7 +269,7 @@ export default function PlansPage() {
                   'Pause, skip or cancel before the cut-off',
                   'Chilled delivery, 7 AM – 12 PM on Sunday',
                   'Unused prepaid weeks stay as account credit',
-                  'No payment is taken in this demo build',
+                  'Card payment captured at checkout, no charge before your first box',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-forest text-cream">

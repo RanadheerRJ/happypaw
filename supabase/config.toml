@@ -1,0 +1,17 @@
+# Supabase CLI configuration for the Happy Paw project.
+#
+# CI (GitHub Actions) uses this with `supabase db push` to sync migrations.
+# Requires the following repository secrets (Settings → Secrets and variables
+# → Actions), which the GitHub App integration cannot manage:
+#
+#   SUPABASE_ACCESS_TOKEN  — a personal access token or project token with the
+#                            `service_role` scope for pghtjewnyogtbbigjanm
+#   SUPABASE_DB_PASSWORD   — the database password for the project's Postgres
+#
+# The publishable key below is public (safe to keep in-repo) and is used for
+# local development builds.
+
+project_id = "pghtjewnyogtbbigjanm"
+
+[projects.pghtjewnyogtbbigjanm]
+anon_key = "sb_publishable_d7elpPAe0OBx7-KDCBNDyA_AO_icl6e"
