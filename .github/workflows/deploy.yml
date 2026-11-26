@@ -112,7 +112,7 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
         run: |
           if [ -z "${VITE_SUPABASE_ANON_KEY:-}" ]; then
-            echo "::error::VITE_SUPABASE_ANON_KEY repository variable is not set. Add it in Settings > Variables (publishable key: sb_publishable_d7elpPAe0OBx7-KDCBNDyA_Oicl6e)."
+            echo "::error::VITE_SUPABASE_ANON_KEY repository variable is not set. Add it in Settings > Variables (publishable key: sb_publishable_d7elpPAe0OBx7-KDCBNDyA_AO_icl6e)."
             exit 1
           fi
           npm run build
