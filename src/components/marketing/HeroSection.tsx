@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, BadgeCheck, ChefHat, MapPin, UtensilsCrossed } from 'lucide-react';
@@ -6,6 +7,13 @@ import { images } from '@/config/assets';
 import { Button } from '@/components/ui/button';
 import { StatCounter } from '@/components/shared/StatCounter';
 import { useWeeklyMenu } from '@/hooks/useCatalog';
+import { useWebGLAvailable } from '@/lib/webgl';
+
+const HeroScene3D = lazy(() =>
+  import('@/components/marketing/HeroScene3D').then((module) => ({
+    default: module.HeroScene3D,
+  })),
+);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -19,6 +27,7 @@ const headline = [
 
 export function HeroSection() {
   const reduce = useReducedMotion();
+  const webgl = useWebGLAvailable();
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -38]);
   const cardsY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -72]);
@@ -182,16 +191,22 @@ export function HeroSection() {
             transition={{ duration: 0.7, ease: EASE }}
             className="relative"
           >
-            <div className="relative overflow-hidden rounded-[32px] border border-forest/10 shadow-lift">
-              <img
-                src={images.heroDogBowl.src}
-                alt={images.heroDogBowl.alt}
-                width={images.heroDogBowl.width}
-                height={images.heroDogBowl.height}
-                fetchPriority="high"
-                decoding="async"
-                className="aspect-[4/5] w-full object-cover sm:aspect-[5/6]"
-              />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[32px] border border-forest/10 shadow-lift sm:aspect-[5/6]">
+              {webgl ? (
+                <Suspense fallback={null}>
+                  <HeroScene3D />
+                </Suspense>
+              ) : (
+                <img
+                  src={images.heroDogBowl.src}
+                  alt={images.heroDogBowl.alt}
+                  width={images.heroDogBowl.width}
+                  height={images.heroDogBowl.height}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+              )}
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest-900/55 via-forest-900/10 to-transparent"
