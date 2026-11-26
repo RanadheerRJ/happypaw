@@ -17,20 +17,19 @@ concurrency:
 
 env:
   SUPABASE_PROJECT_REF: pghtjewnyogtbbigjanm
-  # Workflow-level env CAN reference secrets; job-level `if` cannot, so the
-  # migration job below gates on this env var instead of secrets directly.
+  # Workflow-level env CAN reference secrets. Job-level `if` cannot, so the
+  # migrate job gates on github.ref and checks these vars at step level.
   SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
 jobs:
   migrate:
     name: Apply Supabase migrations
     runs-on: ubuntu-latest
-    # The Supabase CLI needs a personal access token + DB password. The
-    # integration token cannot read Actions secrets, so these are set by the
-    # repo owner in Settings > Secrets. Job-level `if` cannot reference
-    # secrets or env, so the job always runs: the first step exits cleanly
+    # Only run migrations on main. Job-level `if` cannot reference secrets
+    # or env, so the job always runs on main: the first step exits cleanly
     # when credentials are absent and the remaining steps skip — the schema
     # is already applied and the build still deploys.
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Check for Supabase credentials
         env:
@@ -135,6 +134,9 @@ jobs:
   deploy:
     name: Deploy
     needs: build
+    # The github-pages environment's branch policy only permits deployments
+    # from main, so never attempt to deploy from PRs or feature branches.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
