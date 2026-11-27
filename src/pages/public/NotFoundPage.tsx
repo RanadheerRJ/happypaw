@@ -16,15 +16,15 @@ export default function NotFoundPage() {
       />
       <section className="container-x flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
         <div className="relative">
-          <p className="font-display text-[6rem] font-extrabold leading-none text-forest/[0.08] sm:text-[9rem]">
+          <p className="font-display text-[6rem] font-extrabold leading-none text-grape-700/[0.08] sm:text-[9rem]">
             404
           </p>
           <PawMark className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 opacity-80" />
         </div>
-        <h1 className="mt-4 font-display text-2xl font-extrabold text-forest sm:text-3xl">
+        <h1 className="mt-4 font-display text-2xl font-extrabold text-grape-700 sm:text-3xl">
           This bowl is empty
         </h1>
-        <p className="mt-3 max-w-md text-[14px] leading-relaxed text-charcoal-600">
+        <p className="mt-3 max-w-md text-[14px] leading-relaxed text-grape-800-600">
           The page you were looking for has moved, or never existed. Let's get you back to something
           useful — the menu is a good place to start.
         </p>
@@ -40,18 +40,18 @@ export default function NotFoundPage() {
             </Link>
           </Button>
         </div>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] text-charcoal-500">
-          <Link to="/plans" className="inline-flex items-center gap-1 hover:text-forest">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] text-grape-800-500">
+          <Link to="/plans" className="inline-flex items-center gap-1 hover:text-grape-700">
             Plans &amp; pricing <ArrowRight className="h-3 w-3" aria-hidden="true" />
           </Link>
-          <Link to="/delivery-areas" className="inline-flex items-center gap-1 hover:text-forest">
+          <Link to="/delivery-areas" className="inline-flex items-center gap-1 hover:text-grape-700">
             Delivery areas <ArrowRight className="h-3 w-3" aria-hidden="true" />
           </Link>
-          <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-1 hover:text-forest">
+          <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-1 hover:text-grape-700">
             Contact support <ArrowRight className="h-3 w-3" aria-hidden="true" />
           </a>
         </div>
-        <p className="mt-8 inline-flex items-center gap-1.5 text-[11px] text-charcoal-400">
+        <p className="mt-8 inline-flex items-center gap-1.5 text-[11px] text-grape-800-400">
           <Compass className="h-3 w-3" aria-hidden="true" /> Error 404 · page not found
         </p>
       </section>

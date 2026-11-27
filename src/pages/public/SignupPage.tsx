@@ -73,14 +73,14 @@ export default function SignupPage() {
         footer={
           <>
             Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-forest underline decoration-sage-400 underline-offset-4">
+            <Link to="/login" className="font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4">
               Sign in
             </Link>
           </>
         }
       >
         {planSlug && (
-          <div className="mb-4 rounded-2xl border border-sage-200 bg-sage-50 px-4 py-3 text-[12.5px] text-forest-700">
+          <div className="mb-4 rounded-2xl border border-teal-200 bg-teal-50 px-4 py-3 text-[12.5px] text-grape-700">
             You selected the <strong className="font-semibold">{planSlug.replace(/-/g, ' ')}</strong>{' '}
             plan. Create an account and we will confirm your dog's portion before checkout.
           </div>
@@ -160,7 +160,7 @@ export default function SignupPage() {
                   type="button"
                   onClick={() => setShowPassword((value) => !value)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-lg text-charcoal-500 hover:bg-forest/[0.06]"
+                  className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-lg text-grape-800-500 hover:bg-grape-700/[0.06]"
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -190,13 +190,13 @@ export default function SignupPage() {
               }
             />
             <div>
-              <Label htmlFor="signup-consent" className="text-[12.5px] font-normal leading-snug text-charcoal-600">
+              <Label htmlFor="signup-consent" className="text-[12.5px] font-normal leading-snug text-grape-800-600">
                 I agree to the{' '}
-                <Link to="/legal/terms" className="font-medium text-forest underline decoration-sage-400 underline-offset-2">
+                <Link to="/legal/terms" className="font-medium text-grape-700 underline decoration-teal-400 underline-offset-2">
                   Terms
                 </Link>{' '}
                 and{' '}
-                <Link to="/legal/privacy" className="font-medium text-forest underline decoration-sage-400 underline-offset-2">
+                <Link to="/legal/privacy" className="font-medium text-grape-700 underline decoration-teal-400 underline-offset-2">
                   Privacy Policy
                 </Link>
                 , and I understand that Happy Paw meals are not a substitute for veterinary advice.
@@ -216,7 +216,7 @@ export default function SignupPage() {
               </>
             )}
           </Button>
-          <p className="text-center text-[10.5px] leading-relaxed text-charcoal-400">
+          <p className="text-center text-[10.5px] leading-relaxed text-grape-800-400">
             Creating an account is free. Card details are collected later, at checkout.
           </p>
         </form>

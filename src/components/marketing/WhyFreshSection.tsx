@@ -27,7 +27,7 @@ const benefits = [
 
 export function WhyFreshSection() {
   return (
-    <section className="border-y border-forest/10 bg-white py-16 sm:py-20">
+    <section className="border-y border-grape/10 bg-white py-16 sm:py-20">
       <div className="container-x">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
@@ -40,7 +40,7 @@ export function WhyFreshSection() {
             }
             description="Not raw, not kibble, not ultra-processed. A gently cooked bowl built around whole ingredients and real portions."
           />
-          <p className="max-w-xs text-[12px] leading-relaxed text-charcoal-500 lg:text-right">
+          <p className="max-w-xs text-[12px] leading-relaxed text-grape-800-500 lg:text-right">
             Every claim here is about what goes into the bowl — not a promise about health
             outcomes. Talk to your vet about your dog's specific needs.
           </p>
@@ -49,19 +49,19 @@ export function WhyFreshSection() {
         <RevealGroup className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ icon: Icon, title, body }, index) => (
             <RevealItem key={title}>
-              <div className="group h-full rounded-3xl border border-forest/10 bg-cream-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-forest/20 hover:shadow-card">
+              <div className="group h-full rounded-3xl border border-grape/10 bg-sand-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-grape/20 hover:shadow-card">
                 <div className="flex items-center justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-forest text-cream shadow-soft">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-grape-700 text-sand shadow-soft">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
-                  <span className="font-display text-[11px] font-bold tracking-widest text-forest/25">
+                  <span className="font-display text-[11px] font-bold tracking-widest text-grape-700/25">
                     0{index + 1}
                   </span>
                 </div>
-                <h3 className="mt-5 font-display text-[15.5px] font-bold leading-snug text-forest">
+                <h3 className="mt-5 font-display text-[15.5px] font-bold leading-snug text-grape-700">
                   {title}
                 </h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">{body}</p>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-grape-800-600">{body}</p>
               </div>
             </RevealItem>
           ))}

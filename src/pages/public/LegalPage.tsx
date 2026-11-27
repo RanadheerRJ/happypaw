@@ -44,7 +44,7 @@ export default function LegalPage() {
       <section className="section">
         <div className="container-x grid gap-10 lg:grid-cols-[220px_1fr] lg:gap-14">
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-charcoal-400">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-grape-800-400">
               On this page
             </p>
             <nav aria-label="On this page" className="mt-3 space-y-1.5">
@@ -55,15 +55,15 @@ export default function LegalPage() {
                   onClick={() =>
                     document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                   }
-                  className="block text-left text-[12.5px] leading-snug text-charcoal-600 transition-colors hover:text-forest"
+                  className="block text-left text-[12.5px] leading-snug text-grape-800-600 transition-colors hover:text-grape-700"
                 >
                   {section.heading}
                 </button>
               ))}
             </nav>
 
-            <div className="mt-6 border-t border-forest/10 pt-4">
-              <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-charcoal-400">
+            <div className="mt-6 border-t border-grape/10 pt-4">
+              <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-grape-800-400">
                 Other documents
               </p>
               <ul className="mt-2 space-y-1.5">
@@ -73,7 +73,7 @@ export default function LegalPage() {
                     <li key={item}>
                       <Link
                         to={`/legal/${item}`}
-                        className="flex items-center gap-1.5 text-[12.5px] text-forest/80 hover:text-forest"
+                        className="flex items-center gap-1.5 text-[12.5px] text-grape-700/80 hover:text-grape-700"
                       >
                         <FileText className="h-3 w-3" aria-hidden="true" />
                         {legalDocs[item].title}
@@ -93,17 +93,17 @@ export default function LegalPage() {
             <article className="mt-8 space-y-8">
               {doc.sections.map((section) => (
                 <section key={section.id} id={section.id} className="scroll-mt-28">
-                  <h2 className="font-display text-lg font-bold text-forest">{section.heading}</h2>
+                  <h2 className="font-display text-lg font-bold text-grape-700">{section.heading}</h2>
                   {section.paragraphs?.map((paragraph) => (
-                    <p key={paragraph} className="mt-3 text-[14px] leading-7 text-charcoal-600">
+                    <p key={paragraph} className="mt-3 text-[14px] leading-7 text-grape-800-600">
                       {paragraph}
                     </p>
                   ))}
                   {section.bullets && (
                     <ul className="mt-3 space-y-2">
                       {section.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-2.5 text-[14px] leading-7 text-charcoal-600">
-                          <span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-terracotta" aria-hidden="true" />
+                        <li key={bullet} className="flex gap-2.5 text-[14px] leading-7 text-grape-800-600">
+                          <span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-sunset-500" aria-hidden="true" />
                           {bullet}
                         </li>
                       ))}
@@ -113,13 +113,13 @@ export default function LegalPage() {
               ))}
             </article>
 
-            <div className="mt-10 rounded-2xl border border-forest/10 bg-cream-100/70 p-5">
-              <p className="text-[12px] leading-relaxed text-charcoal-600">{brand.medicalFootnote}</p>
-              <p className="mt-3 text-[11.5px] text-charcoal-500">
+            <div className="mt-10 rounded-2xl border border-grape/10 bg-sand-100/70 p-5">
+              <p className="text-[12px] leading-relaxed text-grape-800-600">{brand.medicalFootnote}</p>
+              <p className="mt-3 text-[11.5px] text-grape-800-500">
                 Questions? Email{' '}
                 <a
                   href={`mailto:${brand.email}`}
-                  className="font-medium text-forest underline decoration-sage-400 underline-offset-4"
+                  className="font-medium text-grape-700 underline decoration-teal-400 underline-offset-4"
                 >
                   {brand.email}
                 </a>

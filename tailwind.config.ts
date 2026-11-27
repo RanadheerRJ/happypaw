@@ -4,6 +4,11 @@ import animate from 'tailwindcss-animate';
 /**
  * Design tokens for Happy Paw. Brand values live here (and in src/config/brand.ts
  * for copy/metadata) so the visual identity can be re-skinned in one place.
+ *
+ * Marketing uses a GTA VI–inspired sunset system (sand / grape / sunset / vice /
+ * teal / honey) for airy light sections + deep night sections. Portal tokens
+ * (cream / forest / terracotta / sage / charcoal) are preserved untouched so
+ * /app, /vet and /admin keep their existing look.
  */
 export default {
   darkMode: ['class'],
@@ -65,6 +70,73 @@ export default {
           400: '#6F6F6A',
         },
         ink: '#0B2A1C',
+        /* GTA VI sunset system — marketing only. Bright steps are decorative
+           (blobs, particles, 3D); 600/700 steps are the AA text/button steps. */
+        sand: {
+          DEFAULT: '#FFF6E9',
+          50: '#FFFCF4',
+          100: '#FFF6E9',
+          200: '#FFEDD5',
+          300: '#FFE0B8',
+          400: '#FFC98A',
+        },
+        grape: {
+          DEFAULT: '#1E1033',
+          50: '#F3EEFC',
+          100: '#E7DEF8',
+          200: '#CFC0F0',
+          300: '#A78FE0',
+          400: '#7B5EC9',
+          500: '#4A2E8A',
+          600: '#2E1A5E',
+          700: '#1E1033',
+          800: '#160B28',
+          900: '#0E0619',
+        },
+        sunset: {
+          DEFAULT: '#FF6B4A',
+          50: '#FFF1EC',
+          100: '#FFE0D6',
+          200: '#FFC4B2',
+          300: '#FF9E85',
+          400: '#FF6B4A',
+          500: '#E84E2B',
+          600: '#C2451F',
+          700: '#9A3414',
+        },
+        vice: {
+          DEFAULT: '#FF2E88',
+          50: '#FFEAF3',
+          100: '#FFD0E5',
+          200: '#FFA6CC',
+          300: '#FF6FA9',
+          400: '#FF2E88',
+          500: '#E01A6E',
+          600: '#C2185B',
+          700: '#9A1047',
+        },
+        teal: {
+          DEFAULT: '#00C2B8',
+          50: '#E6FFFD',
+          100: '#C4FFFB',
+          200: '#8AFFF8',
+          300: '#3DE8DF',
+          400: '#00C2B8',
+          500: '#009A92',
+          600: '#007A70',
+          700: '#005E56',
+        },
+        honey: {
+          DEFAULT: '#FFB84D',
+          50: '#FFF7E8',
+          100: '#FFEFCB',
+          200: '#FFE09A',
+          300: '#FFC95E',
+          400: '#FFB84D',
+          500: '#E99A1F',
+          600: '#B8770F',
+          700: '#8A5A12',
+        },
       },
       fontFamily: {
         display: ['"Manrope Variable"', 'Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -79,12 +151,19 @@ export default {
         '5xl': '40px',
       },
       boxShadow: {
-        soft: '0 1px 2px rgba(31,61,43,0.05), 0 8px 24px -12px rgba(31,61,43,0.18)',
-        card: '0 1px 2px rgba(31,61,43,0.04), 0 18px 40px -24px rgba(31,61,43,0.28)',
-        lift: '0 2px 4px rgba(31,61,43,0.05), 0 24px 48px -20px rgba(31,61,43,0.32)',
+        soft: '0 1px 2px rgba(30,16,51,0.05), 0 8px 24px -12px rgba(30,16,51,0.16)',
+        card: '0 1px 2px rgba(30,16,51,0.04), 0 18px 40px -24px rgba(30,16,51,0.26)',
+        lift: '0 2px 4px rgba(30,16,51,0.05), 0 24px 48px -20px rgba(30,16,51,0.30)',
+        glow: '0 0 0 1px rgba(255,110,74,0.18), 0 12px 32px -12px rgba(255,46,136,0.35)',
         inset: 'inset 0 1px 0 rgba(255,255,255,0.6)',
       },
       backgroundImage: {
+        'sunset-gradient':
+          'linear-gradient(135deg, #FF6B4A 0%, #FF2E88 52%, #7B5EC9 100%)',
+        'sunset-soft':
+          'linear-gradient(180deg, rgba(255,107,74,0.10) 0%, rgba(255,46,136,0.08) 55%, rgba(123,94,201,0.10) 100%)',
+        'night-gradient':
+          'linear-gradient(180deg, #1E1033 0%, #2E1A5E 55%, #1E1033 100%)',
         'grain':
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
       },

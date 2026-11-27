@@ -57,7 +57,7 @@ export default function PlansPage() {
         title={
           <>
             One bowl at a time.
-            <span className="font-serif italic text-terracotta"> No lock-in.</span>
+            <span className="font-serif italic text-sunset-600"> No lock-in.</span>
           </>
         }
         description="Weekly plans priced by weight band, with a 10% saving when you prepay for four weeks. Cancel or pause any time before the Thursday cut-off."
@@ -86,7 +86,7 @@ export default function PlansPage() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {isLoading
               ? Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="rounded-3xl border border-forest/10 bg-white p-6">
+                  <div key={index} className="rounded-3xl border border-grape/10 bg-white p-6">
                     <Skeleton className="h-5 w-40" />
                     <Skeleton className="mt-6 h-9 w-32" />
                     <Skeleton className="mt-4 h-3 w-full" />
@@ -108,7 +108,7 @@ export default function PlansPage() {
         </div>
       </section>
 
-      <section className="bg-[#F7F2E7] py-14">
+      <section className="bg-sand-200/60 py-14">
         <div className="container-x">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
@@ -132,7 +132,7 @@ export default function PlansPage() {
                       plan={plan}
                       href={`/plans/${plan.slug}`}
                       ctaLabel="Save 10% monthly"
-                      className="border-forest/15"
+                      className="border-grape/15"
                     />
                   </Reveal>
                 ))}
@@ -161,20 +161,20 @@ export default function PlansPage() {
         </div>
       </section>
 
-      <section className="border-y border-forest/10 bg-white py-16">
+      <section className="border-y border-grape/10 bg-white py-16">
         <div className="container-x">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading eyebrow="Compare" title="Every plan, side by side" />
-            <p className="text-[12px] text-charcoal-500">
+            <p className="text-[12px] text-grape-800-500">
               Prices include free delivery within our Hyderabad zones.
             </p>
           </div>
 
-          <div className="mt-8 overflow-x-auto rounded-3xl border border-forest/10 shadow-soft">
+          <div className="mt-8 overflow-x-auto rounded-3xl border border-grape/10 shadow-soft">
             <table className="w-full min-w-[720px] border-collapse bg-white text-left text-[13px]">
               <caption className="sr-only">Comparison of all Happy Paw subscription plans</caption>
               <thead>
-                <tr className="border-b border-forest/10 bg-cream-100 text-[10.5px] uppercase tracking-[0.1em] text-charcoal-500">
+                <tr className="border-b border-grape/10 bg-sand-100 text-[10.5px] uppercase tracking-[0.1em] text-grape-800-500">
                   <th scope="col" className="px-5 py-3.5 font-semibold">Plan</th>
                   <th scope="col" className="px-4 py-3.5 font-semibold">Duration</th>
                   <th scope="col" className="px-4 py-3.5 font-semibold">Price</th>
@@ -185,25 +185,25 @@ export default function PlansPage() {
               </thead>
               <tbody>
                 {(plans ?? planFixtures).map((plan) => (
-                  <tr key={plan.id} className="border-b border-forest/[0.07] last:border-b-0 hover:bg-cream-50">
+                  <tr key={plan.id} className="border-b border-grape/[0.07] last:border-b-0 hover:bg-sand-50">
                     <th scope="row" className="px-5 py-3.5">
                       <Link
                         to={`/plans/${plan.slug}`}
-                        className="font-display text-[13px] font-bold text-forest hover:text-terracotta-600"
+                        className="font-display text-[13px] font-bold text-grape-700 hover:text-sunset-600"
                       >
                         {plan.name}
                       </Link>
                     </th>
-                    <td className="px-4 py-3.5 text-charcoal-600">{plan.durationDays} days</td>
-                    <td className="px-4 py-3.5 font-semibold text-forest">
+                    <td className="px-4 py-3.5 text-grape-800-600">{plan.durationDays} days</td>
+                    <td className="px-4 py-3.5 font-semibold text-grape-700">
                       {plan.weightBand === 'special' ? 'from ' : ''}
                       {formatINR(plan.priceInr)}
                     </td>
-                    <td className="px-4 py-3.5 text-charcoal-600">
+                    <td className="px-4 py-3.5 text-grape-800-600">
                       {formatINR(perDayPrice(plan.priceInr, plan.durationDays))}
                     </td>
-                    <td className="px-4 py-3.5 text-charcoal-600">{formatINR(weeklyEquivalent(plan))}</td>
-                    <td className="px-4 py-3.5 text-[12px] text-charcoal-500">
+                    <td className="px-4 py-3.5 text-grape-800-600">{formatINR(weeklyEquivalent(plan))}</td>
+                    <td className="px-4 py-3.5 text-[12px] text-grape-800-500">
                       {plan.badge ?? (plan.weightBand === 'special' ? 'Vet consult required' : '—')}
                     </td>
                   </tr>
@@ -211,7 +211,7 @@ export default function PlansPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 flex items-start gap-2 text-[11.5px] text-charcoal-500">
+          <p className="mt-3 flex items-start gap-2 text-[11.5px] text-grape-800-500">
             <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             Per-day and per-week figures are rounded. The trial box is limited to one per household.
           </p>
@@ -228,15 +228,15 @@ export default function PlansPage() {
           <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {addons?.map((addon) => (
               <RevealItem key={addon.id}>
-                <div className="flex h-full flex-col rounded-3xl border border-forest/10 bg-white p-5 shadow-soft transition-transform duration-300 hover:-translate-y-1">
-                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-terracotta-50 text-terracotta-600">
+                <div className="flex h-full flex-col rounded-3xl border border-grape/10 bg-white p-5 shadow-soft transition-transform duration-300 hover:-translate-y-1">
+                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-sunset-500-50 text-sunset-600">
                     <Gift className="h-4 w-4" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-3.5 font-display text-[14.5px] font-bold text-forest">{addon.name}</h3>
-                  <p className="mt-1 font-display text-[13px] font-semibold text-terracotta-600">
+                  <h3 className="mt-3.5 font-display text-[14.5px] font-bold text-grape-700">{addon.name}</h3>
+                  <p className="mt-1 font-display text-[13px] font-semibold text-sunset-600">
                     + {formatINR(addon.priceInr)}
                   </p>
-                  <p className="mt-2 flex-1 text-[12.5px] leading-relaxed text-charcoal-600">
+                  <p className="mt-2 flex-1 text-[12.5px] leading-relaxed text-grape-800-600">
                     {addon.description}
                   </p>
                 </div>
@@ -248,22 +248,22 @@ export default function PlansPage() {
 
       <section className="bg-white py-16">
         <div className="container-x">
-          <div className="rounded-[32px] border border-forest/10 bg-cream-50 p-6 sm:p-10">
+          <div className="rounded-[32px] border border-grape/10 bg-sand-50 p-6 sm:p-10">
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <Badge variant="sage">
                   <Sparkles className="h-3 w-3" aria-hidden="true" /> The weekly rhythm
                 </Badge>
-                <h2 className="mt-4 font-display text-2xl font-bold text-forest sm:text-3xl">
+                <h2 className="mt-4 font-display text-2xl font-bold text-grape-700 sm:text-3xl">
                   Order by Thursday. Eat on Sunday.
                 </h2>
-                <p className="mt-3 max-w-lg text-[14px] leading-relaxed text-charcoal-600">
+                <p className="mt-3 max-w-lg text-[14px] leading-relaxed text-grape-800-600">
                   We cook to the week's order sheet, so the cut-off is firm. Place or change your
                   order by {deliverySchedule.orderCutoffWeekday} {deliverySchedule.orderCutoffTime} and
                   it will be in the kitchen on Saturday.
                 </p>
               </div>
-              <ul className="grid gap-2.5 text-[13px] text-charcoal-600">
+              <ul className="grid gap-2.5 text-[13px] text-grape-800-600">
                 {[
                   'Free delivery in all 10 Hyderabad zones',
                   'Pause, skip or cancel before the cut-off',
@@ -272,7 +272,7 @@ export default function PlansPage() {
                   'Card payment captured at checkout, no charge before your first box',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
-                    <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-forest text-cream">
+                    <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-grape-700 text-sand">
                       <Check className="h-2.5 w-2.5" strokeWidth={3.5} aria-hidden="true" />
                     </span>
                     {item}
@@ -283,8 +283,8 @@ export default function PlansPage() {
           </div>
 
           <div className="mt-10 flex flex-col items-center gap-3 text-center">
-            <h2 className="font-display text-xl font-bold text-forest">Not sure which plan fits?</h2>
-            <p className="max-w-md text-[13.5px] text-charcoal-600">
+            <h2 className="font-display text-xl font-bold text-grape-700">Not sure which plan fits?</h2>
+            <p className="max-w-md text-[13.5px] text-grape-800-600">
               Add your dog and we will recommend a weight band and daily portion before you pay
               anything.
             </p>

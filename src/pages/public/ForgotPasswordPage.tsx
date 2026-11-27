@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
         footer={
           <Link
             to="/login"
-            className="inline-flex items-center gap-1.5 font-semibold text-forest underline decoration-sage-400 underline-offset-4"
+            className="inline-flex items-center gap-1.5 font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4"
           >
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Back to sign in
           </Link>

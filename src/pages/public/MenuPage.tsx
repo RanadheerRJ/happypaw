@@ -50,7 +50,7 @@ export default function MenuPage() {
         title={
           <>
             This week in
-            <span className="font-serif italic text-terracotta"> the kitchen</span>
+            <span className="font-serif italic text-sunset-600"> the kitchen</span>
           </>
         }
         description="Three rotating recipes, cooked in small batches and portioned for each dog. Every bowl lists exactly what is in it."
@@ -72,7 +72,7 @@ export default function MenuPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {loading
               ? Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="overflow-hidden rounded-3xl border border-forest/10 bg-white">
+                  <div key={index} className="overflow-hidden rounded-3xl border border-grape/10 bg-white">
                     <Skeleton className="aspect-[4/3] w-full rounded-none" />
                     <div className="space-y-3 p-5">
                       <Skeleton className="h-3 w-24" />
@@ -110,7 +110,7 @@ export default function MenuPage() {
         </div>
       </section>
 
-      <section className="border-y border-forest/10 bg-white py-16">
+      <section className="border-y border-grape/10 bg-white py-16">
         <div className="container-x">
           <SectionHeading
             eyebrow="How we cook"
@@ -120,12 +120,12 @@ export default function MenuPage() {
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-3">
             {cookingSteps.map(({ icon: Icon, title, body }) => (
               <RevealItem key={title}>
-                <div className="h-full rounded-3xl border border-forest/10 bg-cream-50 p-6">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-sage-100 text-forest">
+                <div className="h-full rounded-3xl border border-grape/10 bg-sand-50 p-6">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-teal-100 text-grape-700">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-4 font-display text-[15px] font-bold text-forest">{title}</h3>
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">{body}</p>
+                  <h3 className="mt-4 font-display text-[15px] font-bold text-grape-700">{title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-grape-800-600">{body}</p>
                 </div>
               </RevealItem>
             ))}
@@ -136,7 +136,7 @@ export default function MenuPage() {
       <section className="section">
         <div className="container-x grid items-center gap-10 lg:grid-cols-2">
           <Reveal className="order-2 lg:order-1">
-            <div className="overflow-hidden rounded-[32px] border border-forest/10 shadow-card">
+            <div className="overflow-hidden rounded-[32px] border border-grape/10 shadow-card">
               <img
                 src={images.kitchen.src}
                 alt={images.kitchen.alt}
@@ -154,7 +154,7 @@ export default function MenuPage() {
               title="Whole ingredients, short lists"
               description={`We buy seasonal vegetables and human-grade proteins from suppliers we visit. If an ingredient would not go into a family meal, it does not go into a ${brand.name} bowl.`}
             />
-            <ul className="mt-6 space-y-3 text-[13.5px] leading-relaxed text-charcoal-600">
+            <ul className="mt-6 space-y-3 text-[13.5px] leading-relaxed text-grape-800-600">
               {[
                 'Proteins: chicken breast and thigh, lean lamb, white fish — no mechanically separated meat.',
                 'Carbohydrates: brown rice, white rice, quinoa and sweet potato, cooked soft.',
@@ -162,12 +162,12 @@ export default function MenuPage() {
                 'Supplements: calcium and mineral mix, fish oil. Nothing else — no colours, no preservatives.',
               ].map((item) => (
                 <li key={item} className="flex gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" aria-hidden="true" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sunset-500" aria-hidden="true" />
                   {item}
                 </li>
               ))}
             </ul>
-            <div className="mt-6 rounded-2xl border border-forest/10 bg-white p-4 text-[12px] leading-relaxed text-charcoal-500">
+            <div className="mt-6 rounded-2xl border border-grape/10 bg-white p-4 text-[12px] leading-relaxed text-grape-800-500">
               Every recipe is formulated with veterinary nutritionist guidance. This is not
               veterinary advice — consult your vet before changing your dog's diet.
             </div>
@@ -176,7 +176,7 @@ export default function MenuPage() {
       </section>
 
       {recipes && recipes.length > 0 && (
-        <section className="border-t border-forest/10 bg-cream-100/60 py-16">
+        <section className="border-t border-grape/10 bg-sand-100/60 py-16">
           <div className="container-x">
             <SectionHeading
               eyebrow="Recipe library"
@@ -187,15 +187,15 @@ export default function MenuPage() {
               {recipes.map((recipe) => (
                 <div
                   key={recipe.id}
-                  className="rounded-2xl border border-forest/10 bg-white p-4 shadow-soft"
+                  className="rounded-2xl border border-grape/10 bg-white p-4 shadow-soft"
                 >
-                  <p className="text-[10.5px] font-semibold uppercase tracking-[0.12em] text-terracotta-600">
+                  <p className="text-[10.5px] font-semibold uppercase tracking-[0.12em] text-sunset-600">
                     {recipe.protein}
                   </p>
-                  <h3 className="mt-1.5 font-display text-[14px] font-bold leading-snug text-forest">
+                  <h3 className="mt-1.5 font-display text-[14px] font-bold leading-snug text-grape-700">
                     {recipe.name}
                   </h3>
-                  <p className="mt-2 text-[12px] text-charcoal-500">
+                  <p className="mt-2 text-[12px] text-grape-800-500">
                     {recipe.caloriesPer100g} kcal / 100 g ·{' '}
                     {recipe.allergens.length ? recipe.allergens.join(', ') : 'no common allergens'}
                   </p>

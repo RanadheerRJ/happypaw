@@ -46,7 +46,7 @@ export function FaqSection({
         </div>
 
         <Reveal delay={0.05}>
-          <Accordion type="single" collapsible className="rounded-3xl border border-forest/10 bg-cream-50 px-5 sm:px-6">
+          <Accordion type="single" collapsible className="rounded-3xl border border-grape/10 bg-sand-50 px-5 sm:px-6">
             {items.map((item, index) => (
               <AccordionItem key={item.question} value={`item-${index}`}>
                 <AccordionTrigger>{item.question}</AccordionTrigger>

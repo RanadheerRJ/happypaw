@@ -127,12 +127,12 @@ export default function PlanDetailPage() {
       <section className="section">
         <div className="container-x grid gap-8 lg:grid-cols-[1.45fr_0.55fr] lg:items-start lg:gap-12">
           <div className="space-y-6">
-            <Reveal className="rounded-3xl border border-forest/10 bg-white p-6 shadow-soft sm:p-8">
-              <h2 className="font-display text-xl font-bold text-forest">What's included</h2>
+            <Reveal className="rounded-3xl border border-grape/10 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="font-display text-xl font-bold text-grape-700">What's included</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-start gap-2.5 text-[13.5px] text-charcoal-600">
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage-200 text-forest">
+                  <div key={feature} className="flex items-start gap-2.5 text-[13.5px] text-grape-800-600">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal-200 text-grape-700">
                       <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
                     </span>
                     {feature}
@@ -140,22 +140,22 @@ export default function PlanDetailPage() {
                 ))}
               </div>
 
-              <div className="mt-7 grid gap-3 border-t border-forest/10 pt-6 sm:grid-cols-3">
+              <div className="mt-7 grid gap-3 border-t border-grape/10 pt-6 sm:grid-cols-3">
                 {[
                   { icon: Utensils, label: `${plan.mealsPerDay} meals per day` },
                   { icon: CalendarDays, label: `${plan.durationDays} days of food` },
                   { icon: Truck, label: 'Free delivery in-zone' },
                 ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-2 text-[12.5px] text-charcoal-600">
-                    <Icon className="h-4 w-4 text-forest-500" aria-hidden="true" />
+                  <div key={label} className="flex items-center gap-2 text-[12.5px] text-grape-800-600">
+                    <Icon className="h-4 w-4 text-grape-500" aria-hidden="true" />
                     {label}
                   </div>
                 ))}
               </div>
             </Reveal>
 
-            <Reveal delay={0.05} className="rounded-3xl border border-forest/10 bg-white p-6 shadow-soft sm:p-8">
-              <h2 className="font-display text-xl font-bold text-forest">How the week works</h2>
+            <Reveal delay={0.05} className="rounded-3xl border border-grape/10 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="font-display text-xl font-bold text-grape-700">How the week works</h2>
               <ol className="mt-5 space-y-5">
                 {[
                   {
@@ -176,24 +176,24 @@ export default function PlanDetailPage() {
                   },
                 ].map((step, index) => (
                   <li key={step.title} className="flex gap-3.5">
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-forest text-[11px] font-bold text-cream">
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-grape-700 text-[11px] font-bold text-sand">
                       {index + 1}
                     </span>
                     <div>
-                      <h3 className="font-display text-[14px] font-bold text-forest">{step.title}</h3>
-                      <p className="mt-1 text-[13px] leading-relaxed text-charcoal-600">{step.body}</p>
+                      <h3 className="font-display text-[14px] font-bold text-grape-700">{step.title}</h3>
+                      <p className="mt-1 text-[13px] leading-relaxed text-grape-800-600">{step.body}</p>
                     </div>
                   </li>
                 ))}
               </ol>
             </Reveal>
 
-            <Reveal delay={0.1} className="rounded-3xl border border-forest/10 bg-sage-50 p-6 sm:p-8">
-              <h2 className="flex items-center gap-2 font-display text-xl font-bold text-forest">
-                <PawPrint className="h-5 w-5 text-terracotta" aria-hidden="true" />
+            <Reveal delay={0.1} className="rounded-3xl border border-grape/10 bg-teal-50 p-6 sm:p-8">
+              <h2 className="flex items-center gap-2 font-display text-xl font-bold text-grape-700">
+                <PawPrint className="h-5 w-5 text-sunset-600" aria-hidden="true" />
                 Portion guidance
               </h2>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-grape-800-600">
                 Every dog gets a portion based on weight, body condition and activity. These are the
                 typical starting points for this band — your dog's card will show exact grams.
               </p>
@@ -203,28 +203,28 @@ export default function PlanDetailPage() {
                   { label: 'Typical', value: '2.2% of body weight/day' },
                   { label: 'Very active', value: '2.6% of body weight/day' },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-forest/10 bg-white/80 p-3.5">
-                    <p className="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-charcoal-400">
+                  <div key={item.label} className="rounded-2xl border border-grape/10 bg-white/80 p-3.5">
+                    <p className="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-grape-800-400">
                       {item.label}
                     </p>
-                    <p className="mt-1 font-display text-[12.5px] font-bold leading-snug text-forest">
+                    <p className="mt-1 font-display text-[12.5px] font-bold leading-snug text-grape-700">
                       {item.value}
                     </p>
                   </div>
                 ))}
               </div>
-              <p className="mt-4 flex items-start gap-2 text-[11.5px] text-charcoal-500">
+              <p className="mt-4 flex items-start gap-2 text-[11.5px] text-grape-800-500">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 Estimates only. Your vet's guidance takes precedence — this is not veterinary advice.
               </p>
             </Reveal>
 
-            <Reveal delay={0.15} className="rounded-3xl border border-forest/10 bg-white p-6 shadow-soft sm:p-8">
-              <h2 className="font-display text-xl font-bold text-forest">Allergens &amp; special diets</h2>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+            <Reveal delay={0.15} className="rounded-3xl border border-grape/10 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="font-display text-xl font-bold text-grape-700">Allergens &amp; special diets</h2>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-grape-800-600">
                 We cook chicken, lamb, fish and dairy in the same kitchen, so trace amounts are
                 possible. If your dog has a severe allergy or a medical condition, choose the{' '}
-                <Link to="/plans/special-diet" className="font-semibold text-forest underline decoration-sage-400 underline-offset-4">
+                <Link to="/plans/special-diet" className="font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4">
                   Special Diet
                 </Link>{' '}
                 plan so a partner vet can review your dog's profile before we cook.
@@ -239,38 +239,38 @@ export default function PlanDetailPage() {
           </div>
 
           <Reveal delay={0.08} className="lg:sticky lg:top-28">
-            <div className="rounded-3xl border border-forest/15 bg-white p-6 shadow-card">
+            <div className="rounded-3xl border border-grape/15 bg-white p-6 shadow-card">
               <div className="flex items-center justify-between">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-charcoal-400">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-grape-800-400">
                   {plan.durationDays === 28 ? 'Every 4 weeks' : `Every ${plan.durationDays} days`}
                 </p>
                 {savings && <Badge variant="accent">Save {savings}%</Badge>}
               </div>
               <div className="mt-2 flex items-end gap-2">
-                <span className="font-display text-4xl font-extrabold tracking-tight text-forest">
+                <span className="font-display text-4xl font-extrabold tracking-tight text-grape-700">
                   {formatINR(plan.priceInr)}
                 </span>
                 {plan.compareAtInr && (
-                  <span className="pb-1 text-[13px] text-charcoal-400 line-through">
+                  <span className="pb-1 text-[13px] text-grape-800-400 line-through">
                     {formatINR(plan.compareAtInr)}
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-[12.5px] text-charcoal-500">
+              <p className="mt-1 text-[12.5px] text-grape-800-500">
                 ≈ {formatINR(perDay)} per day · {plan.mealsPerDay} meals/day
               </p>
 
-              <div className="mt-5 space-y-2.5 border-y border-forest/10 py-5 text-[12.5px] text-charcoal-600">
+              <div className="mt-5 space-y-2.5 border-y border-grape/10 py-5 text-[12.5px] text-grape-800-600">
                 <p className="flex items-center gap-2">
-                  <Truck className="h-4 w-4 text-forest-500" aria-hidden="true" />
+                  <Truck className="h-4 w-4 text-grape-500" aria-hidden="true" />
                   Free delivery · Sunday, {deliverySchedule.deliveryWindow}
                 </p>
                 <p className="flex items-center gap-2">
-                  <PauseCircle className="h-4 w-4 text-forest-500" aria-hidden="true" />
+                  <PauseCircle className="h-4 w-4 text-grape-500" aria-hidden="true" />
                   Pause, skip or cancel before cut-off
                 </p>
                 <p className="flex items-center gap-2">
-                  <ClipboardCheck className="h-4 w-4 text-forest-500" aria-hidden="true" />
+                  <ClipboardCheck className="h-4 w-4 text-grape-500" aria-hidden="true" />
                   Portion card with every delivery
                 </p>
               </div>
@@ -281,16 +281,16 @@ export default function PlanDetailPage() {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </Button>
-              <p className="mt-3 text-center text-[11px] leading-relaxed text-charcoal-400">
+              <p className="mt-3 text-center text-[11px] leading-relaxed text-grape-800-400">
                 No payment is taken yet. You will choose your dog and confirm the portion first.
               </p>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-forest/10 bg-cream-100/70 p-4 text-[12px] leading-relaxed text-charcoal-600">
-              <p className="font-semibold text-forest">Questions about this plan?</p>
+            <div className="mt-4 rounded-2xl border border-grape/10 bg-sand-100/70 p-4 text-[12px] leading-relaxed text-grape-800-600">
+              <p className="font-semibold text-grape-700">Questions about this plan?</p>
               <p className="mt-1">
                 Email{' '}
-                <a href={`mailto:${brand.email}`} className="underline decoration-forest/30 underline-offset-2">
+                <a href={`mailto:${brand.email}`} className="underline decoration-grape/30 underline-offset-2">
                   {brand.email}
                 </a>{' '}
                 or call {brand.phone}, {brand.hours}.

@@ -12,7 +12,7 @@ export function DeliverySection() {
   const { data: zones, isLoading } = useDeliveryZones();
 
   return (
-    <section className="section bg-sage-50">
+    <section className="section bg-teal-50">
       <div className="container-x grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-14">
         <div>
           <SectionHeading
@@ -29,25 +29,25 @@ export function DeliverySection() {
             ].map(({ icon: Icon, label, value }) => (
               <div
                 key={label}
-                className="rounded-2xl border border-forest/10 bg-white/80 p-4 shadow-soft backdrop-blur"
+                className="rounded-2xl border border-grape/10 bg-white/80 p-4 shadow-soft backdrop-blur"
               >
-                <Icon className="h-4 w-4 text-terracotta" aria-hidden="true" />
-                <p className="mt-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-charcoal-400">
+                <Icon className="h-4 w-4 text-sunset-600" aria-hidden="true" />
+                <p className="mt-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-grape-800-400">
                   {label}
                 </p>
-                <p className="mt-0.5 font-display text-[13.5px] font-bold text-forest">{value}</p>
+                <p className="mt-0.5 font-display text-[13.5px] font-bold text-grape-700">{value}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-7">
             <div className="flex items-center justify-between">
-              <p className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-forest-500">
+              <p className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-grape-500">
                 <MapPin className="h-3.5 w-3.5" aria-hidden="true" /> Areas we serve
               </p>
               <Link
                 to="/delivery-areas"
-                className="inline-flex items-center gap-1 text-[12px] font-semibold text-forest underline decoration-sage-400 underline-offset-4 hover:decoration-forest"
+                className="inline-flex items-center gap-1 text-[12px] font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4 hover:decoration-grape"
               >
                 Full list <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
               </Link>
@@ -62,22 +62,22 @@ export function DeliverySection() {
                 : zones?.map((zone) => (
                     <li
                       key={zone.id}
-                      className="rounded-full border border-forest/10 bg-white px-3 py-1.5 text-[12px] text-charcoal-600 shadow-[0_1px_0_rgba(31,61,43,0.03)]"
+                      className="rounded-full border border-grape/10 bg-white px-3 py-1.5 text-[12px] text-grape-800-600 shadow-[0_1px_0_rgba(31,61,43,0.03)]"
                     >
                       {zone.areaName}
-                      <span className="ml-1.5 text-[10.5px] text-charcoal-400">{zone.pincode}</span>
+                      <span className="ml-1.5 text-[10.5px] text-grape-800-400">{zone.pincode}</span>
                     </li>
                   ))}
             </ul>
           </div>
 
-          <p className="mt-6 text-[12px] text-charcoal-500">{deliverySchedule.summary}</p>
+          <p className="mt-6 text-[12px] text-grape-800-500">{deliverySchedule.summary}</p>
         </div>
 
         <Reveal className="lg:sticky lg:top-28">
           <PincodeChecker />
-          <div className="mt-4 rounded-2xl border border-forest/10 bg-white/70 p-4 text-[12px] leading-relaxed text-charcoal-600">
-            <strong className="font-semibold text-forest">Outside these areas?</strong> Join the
+          <div className="mt-4 rounded-2xl border border-grape/10 bg-white/70 p-4 text-[12px] leading-relaxed text-grape-800-600">
+            <strong className="font-semibold text-grape-700">Outside these areas?</strong> Join the
             waitlist and we will email you when we get there. We never share your details.
           </div>
         </Reveal>

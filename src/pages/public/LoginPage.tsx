@@ -55,7 +55,7 @@ export default function LoginPage() {
         footer={
           <>
             New to Happy Paw?{' '}
-            <Link to="/signup" className="font-semibold text-forest underline decoration-sage-400 underline-offset-4">
+            <Link to="/signup" className="font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4">
               Create an account
             </Link>
           </>
@@ -92,7 +92,7 @@ export default function LoginPage() {
               <Label htmlFor="login-password">Password</Label>
               <Link
                 to="/forgot-password"
-                className="text-[12px] font-medium text-forest underline decoration-sage-400 underline-offset-4 hover:decoration-forest"
+                className="text-[12px] font-medium text-grape-700 underline decoration-teal-400 underline-offset-4 hover:decoration-grape"
               >
                 Forgot password?
               </Link>
@@ -112,7 +112,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
-                className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-lg text-charcoal-500 transition-colors hover:bg-forest/[0.06] hover:text-forest"
+                className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-lg text-grape-800-500 transition-colors hover:bg-grape-700/[0.06] hover:text-grape-700"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>

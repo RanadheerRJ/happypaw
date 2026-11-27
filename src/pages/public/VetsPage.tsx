@@ -53,7 +53,7 @@ export default function VetsPage() {
         title={
           <>
             Better food,
-            <span className="font-serif italic text-terracotta"> with you in the loop</span>
+            <span className="font-serif italic text-sunset-600"> with you in the loop</span>
           </>
         }
         description="A partner programme built around clinical involvement rather than discount codes. Refer a client, keep visibility of their dog's nutrition, and override anything you disagree with."
@@ -74,7 +74,7 @@ export default function VetsPage() {
       <section className="section">
         <div className="container-x grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <Reveal className="relative">
-            <div className="overflow-hidden rounded-[32px] border border-forest/10 shadow-lift">
+            <div className="overflow-hidden rounded-[32px] border border-grape/10 shadow-lift">
               <img
                 src={images.vet.src}
                 alt={images.vet.alt}
@@ -85,14 +85,14 @@ export default function VetsPage() {
                 className="aspect-[16/11] w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-5 -right-3 max-w-[240px] rounded-2xl border border-forest/10 bg-white p-4 shadow-card sm:-right-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-terracotta-600">
+            <div className="absolute -bottom-5 -right-3 max-w-[240px] rounded-2xl border border-grape/10 bg-white p-4 shadow-card sm:-right-6">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-sunset-600">
                 Partner clinic
               </p>
-              <p className="mt-1.5 font-display text-[13.5px] font-bold text-forest">
+              <p className="mt-1.5 font-display text-[13.5px] font-bold text-grape-700">
                 Paws &amp; Wellness Clinic
               </p>
-              <p className="text-[11.5px] text-charcoal-500">Jubilee Hills, Hyderabad</p>
+              <p className="text-[11.5px] text-grape-800-500">Jubilee Hills, Hyderabad</p>
               <p className="mt-2 flex items-center gap-1.5 text-[10.5px] text-emerald-700">
                 <BadgeCheck className="h-3 w-3" aria-hidden="true" /> Verified partner (demo)
               </p>
@@ -108,12 +108,12 @@ export default function VetsPage() {
             <div className="mt-6 space-y-3.5">
               {features.map(({ icon: Icon, title, body }) => (
                 <div key={title} className="flex gap-3.5">
-                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-sage-100 text-forest">
+                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal-100 text-grape-700">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <div>
-                    <h3 className="font-display text-[14px] font-bold text-forest">{title}</h3>
-                    <p className="mt-0.5 text-[13px] leading-relaxed text-charcoal-600">{body}</p>
+                    <h3 className="font-display text-[14px] font-bold text-grape-700">{title}</h3>
+                    <p className="mt-0.5 text-[13px] leading-relaxed text-grape-800-600">{body}</p>
                   </div>
                 </div>
               ))}
@@ -122,7 +122,7 @@ export default function VetsPage() {
         </div>
       </section>
 
-      <section className="border-y border-forest/10 bg-white py-16">
+      <section className="border-y border-grape/10 bg-white py-16">
         <div className="container-x">
           <SectionHeading
             eyebrow="How it works"
@@ -148,29 +148,29 @@ export default function VetsPage() {
               },
             ].map((item, index) => (
               <RevealItem key={item.step}>
-                <div className="h-full rounded-3xl border border-forest/10 bg-cream-50 p-6">
+                <div className="h-full rounded-3xl border border-grape/10 bg-sand-50 p-6">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-[10.5px] font-bold uppercase tracking-[0.16em] text-terracotta-600">
+                    <span className="font-display text-[10.5px] font-bold uppercase tracking-[0.16em] text-sunset-600">
                       Step {index + 1}
                     </span>
-                    <span className="font-display text-3xl font-extrabold text-forest/10">
+                    <span className="font-display text-3xl font-extrabold text-grape-700/10">
                       0{index + 1}
                     </span>
                   </div>
-                  <h3 className="mt-3 font-display text-[16px] font-bold text-forest">{item.title}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">{item.body}</p>
+                  <h3 className="mt-3 font-display text-[16px] font-bold text-grape-700">{item.title}</h3>
+                  <p className="mt-2 text-[13px] leading-relaxed text-grape-800-600">{item.body}</p>
                 </div>
               </RevealItem>
             ))}
           </RevealGroup>
 
-          <Reveal className="mt-10 rounded-3xl border border-forest/10 bg-sage-50 p-6">
+          <Reveal className="mt-10 rounded-3xl border border-grape/10 bg-teal-50 p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h3 className="font-display text-[15px] font-bold text-forest">
+                <h3 className="font-display text-[15px] font-bold text-grape-700">
                   Referral rewards
                 </h3>
-                <p className="mt-1 max-w-xl text-[12.5px] leading-relaxed text-charcoal-600">
+                <p className="mt-1 max-w-xl text-[12.5px] leading-relaxed text-grape-800-600">
                   Rewards are agreed per clinic and settled monthly against your referral log.
                   Payouts happen through a standard payout channel once your clinic agreement is in
                   place.
@@ -187,7 +187,7 @@ export default function VetsPage() {
       </section>
 
       <section className="section">
-        <div className="container-x grid gap-8 rounded-[32px] border border-forest/10 bg-white p-6 shadow-soft sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div className="container-x grid gap-8 rounded-[32px] border border-grape/10 bg-white p-6 shadow-soft sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div>
             <SectionHeading
               eyebrow="Existing partners"
@@ -202,16 +202,16 @@ export default function VetsPage() {
                 <Link to="/contact?topic=vet">Apply to partner</Link>
               </Button>
             </div>
-            <p className="mt-4 text-[11.5px] text-charcoal-500">
+            <p className="mt-4 text-[11.5px] text-grape-800-500">
               Vet partners get a dedicated clinic email to sign in with. Not a vet yet?{' '}
-              <Link to="/contact?topic=vet" className="font-semibold text-forest underline decoration-sage-400 underline-offset-4">
+              <Link to="/contact?topic=vet" className="font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4">
                 Apply to partner
               </Link>
               .
             </p>
           </div>
-          <div className="rounded-2xl border border-forest/10 bg-cream-50 p-5">
-            <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-charcoal-400">
+          <div className="rounded-2xl border border-grape/10 bg-sand-50 p-5">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-grape-800-400">
               Vet dashboard preview
             </p>
             <div className="mt-3 space-y-2.5">
@@ -221,12 +221,12 @@ export default function VetsPage() {
                 ['Dogs with allergy notes', '6'],
               ].map(([label, value]) => (
                 <div key={label} className="flex items-center justify-between rounded-xl bg-white px-3.5 py-2.5">
-                  <span className="text-[12px] text-charcoal-600">{label}</span>
-                  <span className="font-display text-[13px] font-bold text-forest">{value}</span>
+                  <span className="text-[12px] text-grape-800-600">{label}</span>
+                  <span className="font-display text-[13px] font-bold text-grape-700">{value}</span>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-[10.5px] text-charcoal-400">Dashboard preview — your numbers appear here after sign-in.</p>
+            <p className="mt-3 text-[10.5px] text-grape-800-400">Dashboard preview — your numbers appear here after sign-in.</p>
           </div>
         </div>
       </section>

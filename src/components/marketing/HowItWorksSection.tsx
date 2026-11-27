@@ -47,20 +47,20 @@ export function HowItWorksSection() {
         <RevealGroup className="relative mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div
             aria-hidden="true"
-            className="absolute left-[12%] right-[12%] top-[42px] hidden border-t border-dashed border-forest/20 lg:block"
+            className="absolute left-[12%] right-[12%] top-[42px] hidden border-t border-dashed border-grape/20 lg:block"
           />
           {steps.map(({ icon: Icon, title, body, meta }, index) => (
             <RevealItem key={title}>
-              <div className="relative h-full rounded-3xl border border-forest/10 bg-white p-6 text-center shadow-soft transition-transform duration-300 hover:-translate-y-1">
-                <div className="relative mx-auto grid h-[68px] w-[68px] place-items-center rounded-full border border-sage-200 bg-sage-50">
-                  <Icon className="h-6 w-6 text-forest" aria-hidden="true" />
-                  <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-terracotta text-[10px] font-bold text-white shadow-soft">
+              <div className="relative h-full rounded-3xl border border-grape/10 bg-white p-6 text-center shadow-soft transition-transform duration-300 hover:-translate-y-1">
+                <div className="relative mx-auto grid h-[68px] w-[68px] place-items-center rounded-full border border-teal-200 bg-teal-50">
+                  <Icon className="h-6 w-6 text-grape-700" aria-hidden="true" />
+                  <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-sunset-500 text-[10px] font-bold text-white shadow-soft">
                     {index + 1}
                   </span>
                 </div>
-                <h3 className="mt-5 font-display text-[16px] font-bold text-forest">{title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">{body}</p>
-                <p className="mt-4 inline-flex rounded-full bg-cream-200/80 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-forest-600">
+                <h3 className="mt-5 font-display text-[16px] font-bold text-grape-700">{title}</h3>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-grape-800-600">{body}</p>
+                <p className="mt-4 inline-flex rounded-full bg-sand-200/80 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-grape-600">
                   {meta}
                 </p>
               </div>
@@ -74,7 +74,7 @@ export function HowItWorksSection() {
               See the full process <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>
-          <p className="text-[12.5px] text-charcoal-500">{deliverySchedule.summary}</p>
+          <p className="text-[12.5px] text-grape-800-500">{deliverySchedule.summary}</p>
         </div>
       </div>
     </section>

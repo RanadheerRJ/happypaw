@@ -18,16 +18,16 @@ export default function ForbiddenPage() {
     <>
       <SEO title="Access denied" description="You do not have access to this area." path="/403" noIndex />
       <section className="container-x flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-3xl bg-terracotta-50 text-terracotta-600">
+        <span className="grid h-16 w-16 place-items-center rounded-3xl bg-sunset-500-50 text-sunset-600">
           <LockKeyhole className="h-7 w-7" aria-hidden="true" />
         </span>
-        <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta-600">
+        <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-sunset-600">
           Error 403
         </p>
-        <h1 className="mt-2 font-display text-2xl font-extrabold text-forest sm:text-3xl">
+        <h1 className="mt-2 font-display text-2xl font-extrabold text-grape-700 sm:text-3xl">
           This area is not for your account
         </h1>
-        <p className="mt-3 max-w-md text-[14px] leading-relaxed text-charcoal-600">
+        <p className="mt-3 max-w-md text-[14px] leading-relaxed text-grape-800-600">
           {session
             ? `You are signed in as ${session.user.fullName}, a ${session.user.role} account. This page is restricted to a different role.`
             : 'You need to be signed in with the right role to view this page.'}
@@ -59,7 +59,7 @@ export default function ForbiddenPage() {
           )}
         </div>
 
-        <p className="mt-8 max-w-sm text-[11.5px] leading-relaxed text-charcoal-400">
+        <p className="mt-8 max-w-sm text-[11.5px] leading-relaxed text-grape-800-400">
           Access is enforced with row-level security on every table in production — not just by
           hiding links in the interface.
         </p>

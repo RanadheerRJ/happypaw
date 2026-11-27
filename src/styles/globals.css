@@ -9,6 +9,13 @@
     --terracotta: 224 106 59;
     --sage: 157 191 160;
     --charcoal: 42 42 40;
+    /* GTA VI sunset system (marketing). Portal tokens above stay untouched. */
+    --sand: 255 246 233;
+    --grape: 30 16 51;
+    --sunset: 255 107 74;
+    --vice: 255 46 136;
+    --teal: 0 194 184;
+    --honey: 255 184 77;
     color-scheme: light;
   }
 
@@ -43,12 +50,12 @@
   }
 
   ::selection {
-    background: rgb(var(--sage) / 0.45);
-    color: rgb(var(--forest));
+    background: rgb(var(--sunset) / 0.28);
+    color: rgb(var(--grape));
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--forest));
+    outline: 2px solid rgb(var(--grape));
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -75,23 +82,23 @@
   }
 
   .section {
-    @apply py-16 sm:py-20 lg:py-28;
+    @apply py-20 sm:py-24 lg:py-32;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta-600;
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-sunset-600;
   }
 
   .display-1 {
-    @apply font-display text-[2.6rem] font-extrabold leading-[1.03] sm:text-6xl lg:text-[4.25rem];
+    @apply font-display text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.5rem];
   }
 
   .display-2 {
-    @apply font-display text-[2rem] font-extrabold leading-[1.08] sm:text-4xl lg:text-[2.9rem];
+    @apply font-display text-[2.25rem] font-extrabold leading-[1.06] tracking-[-0.025em] sm:text-4xl lg:text-[3.1rem];
   }
 
   .display-3 {
-    @apply font-display text-2xl font-bold leading-tight sm:text-3xl;
+    @apply font-display text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl;
   }
 
   .lede {
@@ -99,7 +106,23 @@
   }
 
   .card-surface {
-    @apply rounded-3xl border border-forest/10 bg-white shadow-soft;
+    @apply rounded-[28px] border border-grape/10 bg-white shadow-soft;
+  }
+
+  /* Sunset gradient text for single accent words (decorative, AA-safe sizes only). */
+  .text-sunset-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #C2451F 0%, #C2185B 55%, #4A2E8A 100%);
+  }
+
+  /* Deep night section (Menu preview, CTA, footer band). */
+  .night-section {
+    @apply bg-grape-700 text-sand;
+  }
+
+  /* Soft sunset wash behind light marketing sections. */
+  .sunset-wash {
+    background-image: theme('backgroundImage.sunset-soft');
   }
 
   .grain::before {
@@ -113,7 +136,7 @@
   }
 
   .skip-link {
-    @apply absolute left-4 top-4 z-[100] -translate-y-24 rounded-full bg-forest px-5 py-3 text-sm font-semibold text-cream transition-transform focus:translate-y-0;
+    @apply absolute left-4 top-4 z-[100] -translate-y-24 rounded-full bg-grape-700 px-5 py-3 text-sm font-semibold text-sand transition-transform focus:translate-y-0;
   }
 
   .marquee-mask {
