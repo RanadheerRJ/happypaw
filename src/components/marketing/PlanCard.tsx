@@ -39,8 +39,8 @@ export function PlanCard({
     <>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="font-display text-[17px] font-bold leading-tight text-forest">{plan.name}</h3>
-          <p className="mt-1 text-[12.5px] text-charcoal-500">
+          <h3 className="font-display text-[17px] font-bold leading-tight text-grape-700">{plan.name}</h3>
+          <p className="mt-1 text-[12.5px] text-grape-800-500">
             {plan.durationDays} days · {plan.mealsPerDay} {plan.mealsPerDay === 1 ? 'meal' : 'meals'}/day
           </p>
         </div>
@@ -52,28 +52,28 @@ export function PlanCard({
       </div>
 
       <div className="mt-5 flex items-end gap-1.5">
-        <span className="font-display text-[2rem] font-extrabold leading-none tracking-tight text-forest">
+        <span className="font-display text-[2rem] font-extrabold leading-none tracking-tight text-grape-700">
           {price}
         </span>
         {!isSpecial && (
-          <span className="pb-0.5 text-[12.5px] font-medium text-charcoal-500">
+          <span className="pb-0.5 text-[12.5px] font-medium text-grape-800-500">
             {durationLabel(plan)}
           </span>
         )}
       </div>
-      <p className="mt-1.5 text-[12.5px] text-charcoal-500">
+      <p className="mt-1.5 text-[12.5px] text-grape-800-500">
         {isSpecial ? 'Requires a vet consult' : `≈ ${formatINR(perDayPrice(plan.priceInr, plan.durationDays))} per day`}
         {plan.compareAtInr ? (
-          <span className="ml-2 text-charcoal-400 line-through">{formatINR(plan.compareAtInr)}</span>
+          <span className="ml-2 text-grape-800-400 line-through">{formatINR(plan.compareAtInr)}</span>
         ) : null}
       </p>
 
-      <p className="mt-4 text-[13.5px] leading-relaxed text-charcoal-600">{plan.description}</p>
+      <p className="mt-4 text-[13.5px] leading-relaxed text-grape-800-600">{plan.description}</p>
 
       <ul className="mt-5 space-y-2">
         {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-2 text-[13px] text-charcoal-600">
-            <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-sage-200 text-forest">
+          <li key={feature} className="flex items-start gap-2 text-[13px] text-grape-800-600">
+            <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-teal-200 text-grape-700">
               <Check className="h-2.5 w-2.5" strokeWidth={3.5} aria-hidden="true" />
             </span>
             {feature}
@@ -103,7 +103,7 @@ export function PlanCard({
             <Link to={href ?? `/plans/${plan.slug}`}>{ctaLabel}</Link>
           </Button>
         )}
-        <p className="mt-2.5 text-center text-[11.5px] text-charcoal-400">
+        <p className="mt-2.5 text-center text-[11.5px] text-grape-800-400">
           Cancel or pause anytime · Free delivery in-zone
         </p>
       </div>
@@ -115,16 +115,16 @@ export function PlanCard({
       className={cn(
         'relative flex h-full flex-col rounded-3xl border bg-white p-5 shadow-soft transition-all duration-300 sm:p-6',
         selected
-          ? 'scale-[1.02] border-terracotta/60 ring-2 ring-terracotta/40 shadow-lift'
-          : 'border-forest/10 hover:-translate-y-1 hover:shadow-card',
-        featured && !selected && 'border-forest/20',
+          ? 'scale-[1.02] border-sunset/60 ring-2 ring-sunset/40 shadow-lift'
+          : 'border-grape/10 hover:-translate-y-1 hover:shadow-card',
+        featured && !selected && 'border-grape/20',
         className,
       )}
     >
       {featured && (
         <span
           aria-hidden="true"
-          className="absolute inset-x-6 -top-px h-0.5 rounded-full bg-gradient-to-r from-transparent via-terracotta to-transparent"
+          className="absolute inset-x-6 -top-px h-0.5 rounded-full bg-gradient-to-r from-transparent via-sunset-500 to-transparent"
         />
       )}
       {body}
