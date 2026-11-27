@@ -15,7 +15,7 @@ export function PlansPreviewSection() {
   );
 
   return (
-    <section className="section bg-[#F7F2E7]">
+    <section className="section bg-sand-200/60">
       <div className="container-x">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
@@ -24,12 +24,12 @@ export function PlansPreviewSection() {
             description="Weekly plans are priced by your dog's weight band. Prepay for four weeks and save 10%."
           />
           <Reveal delay={0.1}>
-            <div className="inline-flex items-center gap-2 rounded-2xl border border-forest/10 bg-white/70 px-4 py-3 text-[12.5px] text-forest shadow-soft">
-              <Clock className="h-4 w-4 text-terracotta" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-grape/10 bg-white/70 px-4 py-3 text-[12.5px] text-grape-700 shadow-soft">
+              <Clock className="h-4 w-4 text-sunset-600" aria-hidden="true" />
               <span>
                 <strong className="font-semibold">Order by {deliverySchedule.orderCutoffWeekday} {deliverySchedule.orderCutoffTime}</strong>
                 <br />
-                <span className="text-charcoal-500">for Sunday delivery, {deliverySchedule.deliveryWindow}</span>
+                <span className="text-grape-800-500">for Sunday delivery, {deliverySchedule.deliveryWindow}</span>
               </span>
             </div>
           </Reveal>
@@ -38,7 +38,7 @@ export function PlansPreviewSection() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading || !weekly
             ? Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="rounded-3xl border border-forest/10 bg-white p-6">
+                <div key={index} className="rounded-3xl border border-grape/10 bg-white p-6">
                   <Skeleton className="h-5 w-40" />
                   <Skeleton className="mt-2 h-3 w-28" />
                   <Skeleton className="mt-6 h-9 w-32" />
@@ -59,12 +59,12 @@ export function PlansPreviewSection() {
               ))}
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-forest/10 bg-white/60 p-5 sm:flex-row">
-          <p className="text-[13px] text-charcoal-600">
-            Monthly prepaid plans from <strong className="text-forest">₹2,696</strong> · Trial box{' '}
-            <strong className="text-forest">₹299</strong> · Fresh topper{' '}
-            <strong className="text-forest">₹349/week</strong> · Special diets from{' '}
-            <strong className="text-forest">₹1,299/week</strong>
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-grape/10 bg-white/60 p-5 sm:flex-row">
+          <p className="text-[13px] text-grape-800-600">
+            Monthly prepaid plans from <strong className="text-grape-700">₹2,696</strong> · Trial box{' '}
+            <strong className="text-grape-700">₹299</strong> · Fresh topper{' '}
+            <strong className="text-grape-700">₹349/week</strong> · Special diets from{' '}
+            <strong className="text-grape-700">₹1,299/week</strong>
           </p>
           <Button asChild variant="outline" className="shrink-0 bg-white">
             <Link to="/plans">
