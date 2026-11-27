@@ -26,7 +26,7 @@ export default function DeliveryAreasPage() {
         title={
           <>
             Ten neighbourhoods.
-            <span className="font-serif italic text-terracotta"> One delivery day.</span>
+            <span className="font-serif italic text-sunset-600"> One delivery day.</span>
           </>
         }
         description={`We deliver across ${brand.city} every Sunday between ${deliverySchedule.deliveryWindow}. Check your pincode, or join the waitlist and we will come to you next.`}
@@ -59,24 +59,24 @@ export default function DeliveryAreasPage() {
                 { icon: CalendarCheck, label: 'Delivery day', value: deliverySchedule.deliveryWeekday },
                 { icon: Truck, label: 'Window', value: deliverySchedule.deliveryWindow },
               ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="rounded-2xl border border-forest/10 bg-white p-4">
-                  <Icon className="h-4 w-4 text-terracotta" aria-hidden="true" />
-                  <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-charcoal-400">
+                <div key={label} className="rounded-2xl border border-grape/10 bg-white p-4">
+                  <Icon className="h-4 w-4 text-sunset-600" aria-hidden="true" />
+                  <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-grape-800-400">
                     {label}
                   </p>
-                  <p className="mt-0.5 font-display text-[12.5px] font-bold text-forest">{value}</p>
+                  <p className="mt-0.5 font-display text-[12.5px] font-bold text-grape-700">{value}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <div className="rounded-3xl border border-forest/10 bg-white p-5 shadow-soft sm:p-6">
+            <div className="rounded-3xl border border-grape/10 bg-white p-5 shadow-soft sm:p-6">
               <div className="flex items-center justify-between">
-                <h2 className="flex items-center gap-2 font-display text-[15px] font-bold text-forest">
-                  <MapPin className="h-4 w-4 text-terracotta" aria-hidden="true" /> Areas we serve
+                <h2 className="flex items-center gap-2 font-display text-[15px] font-bold text-grape-700">
+                  <MapPin className="h-4 w-4 text-sunset-600" aria-hidden="true" /> Areas we serve
                 </h2>
-                <span className="text-[11px] text-charcoal-400">
+                <span className="text-[11px] text-grape-800-400">
                   {zones?.length ?? '—'} areas
                 </span>
               </div>
@@ -91,15 +91,15 @@ export default function DeliveryAreasPage() {
                   : zones?.map((zone) => (
                       <li
                         key={zone.id}
-                        className="flex items-center justify-between rounded-xl border border-forest/[0.08] bg-cream-50 px-3 py-2.5 transition-colors hover:border-forest/20"
+                        className="flex items-center justify-between rounded-xl border border-grape/[0.08] bg-sand-50 px-3 py-2.5 transition-colors hover:border-grape/20"
                       >
-                        <span className="text-[12.5px] font-medium text-forest">{zone.areaName}</span>
-                        <span className="font-mono text-[11px] text-charcoal-500">{zone.pincode}</span>
+                        <span className="text-[12.5px] font-medium text-grape-700">{zone.areaName}</span>
+                        <span className="font-mono text-[11px] text-grape-800-500">{zone.pincode}</span>
                       </li>
                     ))}
               </ul>
 
-              <p className="mt-4 border-t border-forest/10 pt-4 text-[11.5px] leading-relaxed text-charcoal-500">
+              <p className="mt-4 border-t border-grape/10 pt-4 text-[11.5px] leading-relaxed text-grape-800-500">
                 Pincodes are grouped by area; some pincodes cover multiple neighbourhoods. If your
                 pincode matches but your street is outside our route, we will call before your first
                 delivery.
@@ -112,9 +112,9 @@ export default function DeliveryAreasPage() {
                 { title: 'Doorstep handover', body: 'We ring the bell and hand over — no left-on-the-step surprises.' },
               ].map((item) => (
                 <RevealItem key={item.title}>
-                  <div className="h-full rounded-2xl border border-forest/10 bg-cream-100/70 p-4">
-                    <h3 className="font-display text-[12.5px] font-bold text-forest">{item.title}</h3>
-                    <p className="mt-1 text-[11.5px] leading-relaxed text-charcoal-600">{item.body}</p>
+                  <div className="h-full rounded-2xl border border-grape/10 bg-sand-100/70 p-4">
+                    <h3 className="font-display text-[12.5px] font-bold text-grape-700">{item.title}</h3>
+                    <p className="mt-1 text-[11.5px] leading-relaxed text-grape-800-600">{item.body}</p>
                   </div>
                 </RevealItem>
               ))}
@@ -123,7 +123,7 @@ export default function DeliveryAreasPage() {
         </div>
       </section>
 
-      <section className="border-t border-forest/10 bg-sage-50 py-14">
+      <section className="border-t border-grape/10 bg-teal-50 py-14">
         <div className="container-x">
           <SectionHeading
             eyebrow="Expanding"

@@ -19,7 +19,7 @@ export function PhotoMarquee({ className }: { className?: string }) {
             <figure
               key={`${image.src}-${index}`}
               className={cn(
-                'relative h-[190px] w-[150px] shrink-0 overflow-hidden rounded-2xl border border-forest/10 bg-cream-200 sm:h-[230px] sm:w-[185px]',
+                'relative h-[190px] w-[150px] shrink-0 overflow-hidden rounded-2xl border border-grape/10 bg-sand-200 sm:h-[230px] sm:w-[185px]',
                 index % 3 === 1 && 'mt-5',
               )}
             >
@@ -43,12 +43,12 @@ export function PhotoMarquee({ className }: { className?: string }) {
           type="button"
           onClick={() => setPaused((value) => !value)}
           aria-pressed={paused}
-          className="inline-flex items-center gap-2 rounded-full border border-forest/15 bg-white/80 px-3.5 py-1.5 text-[12px] font-medium text-forest transition-colors hover:bg-white"
+          className="inline-flex items-center gap-2 rounded-full border border-grape/15 bg-white/80 px-3.5 py-1.5 text-[12px] font-medium text-grape-700 transition-colors hover:bg-white"
         >
           {paused ? <Play className="h-3 w-3" aria-hidden="true" /> : <Pause className="h-3 w-3" aria-hidden="true" />}
           {paused ? 'Play gallery' : 'Pause gallery'}
         </button>
-        <p className="text-[11.5px] text-charcoal-400">Demo photos of dogs on fresh food</p>
+        <p className="text-[11.5px] text-grape-800-400">Demo photos of dogs on fresh food</p>
       </div>
     </div>
   );

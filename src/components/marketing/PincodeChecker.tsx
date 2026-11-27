@@ -74,17 +74,17 @@ export function PincodeChecker({
   return (
     <div
       className={cn(
-        'rounded-3xl border border-forest/10 bg-white p-5 shadow-soft sm:p-6',
+        'rounded-3xl border border-grape/10 bg-white p-5 shadow-soft sm:p-6',
         className,
       )}
     >
       <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-sage-100 text-forest">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-teal-100 text-grape-700">
           <MapPin className="h-5 w-5" aria-hidden="true" />
         </span>
         <div>
-          <h3 className="font-display text-lg font-bold text-forest">Do we deliver to you?</h3>
-          <p className="mt-1 text-[13.5px] text-charcoal-600">
+          <h3 className="font-display text-lg font-bold text-grape-700">Do we deliver to you?</h3>
+          <p className="mt-1 text-[13.5px] text-grape-800-600">
             Enter your Hyderabad pincode — we deliver every Sunday, 7 AM – 12 PM.
           </p>
         </div>

@@ -22,10 +22,10 @@ export function RecipeCard({
     <TiltCard className={className} max={6}>
       <article
         className={cn(
-          'group flex h-full flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card',
+          'group flex h-full flex-col overflow-hidden rounded-3xl border border-grape/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card',
         )}
       >
-      <div className="relative aspect-[4/3] overflow-hidden bg-cream-200">
+      <div className="relative aspect-[4/3] overflow-hidden bg-sand-200">
         <img
           src={recipe.photoUrl}
           alt={`${recipe.name} — freshly cooked dog food`}
@@ -36,16 +36,16 @@ export function RecipeCard({
           className="h-full w-full object-cover transition-transform duration-500 ease-out-quart group-hover:scale-[1.03]"
         />
         <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
-          <Badge variant="default" className="bg-cream/90 text-forest backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-terracotta" aria-hidden="true" />
+          <Badge variant="default" className="bg-sand/90 text-grape-700 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-sunset-500" aria-hidden="true" />
             {titleCase(recipe.protein)}
           </Badge>
           {hasAllergens ? (
-            <Badge variant="warn" className="bg-cream/90 backdrop-blur">
+            <Badge variant="warn" className="bg-sand/90 backdrop-blur">
               Contains {recipe.allergens[0]}
             </Badge>
           ) : (
-            <Badge variant="success" className="bg-cream/90 backdrop-blur">
+            <Badge variant="success" className="bg-sand/90 backdrop-blur">
               <WheatOff className="h-3 w-3" aria-hidden="true" /> No common allergens
             </Badge>
           )}
@@ -53,20 +53,20 @@ export function RecipeCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <p className="eyebrow text-[10px] tracking-[0.14em] text-terracotta-500">{recipe.tagline}</p>
-        <h3 className="mt-2 font-display text-lg font-bold leading-snug text-forest">{recipe.name}</h3>
-        <p className={cn('mt-2 text-[13.5px] leading-relaxed text-charcoal-600', compact && 'line-clamp-2')}>
+        <p className="eyebrow text-[10px] tracking-[0.14em] text-sunset-500">{recipe.tagline}</p>
+        <h3 className="mt-2 font-display text-lg font-bold leading-snug text-grape-700">{recipe.name}</h3>
+        <p className={cn('mt-2 text-[13.5px] leading-relaxed text-grape-800-600', compact && 'line-clamp-2')}>
           {recipe.description}
         </p>
 
-        <dl className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-forest/10 pt-4 text-[12px] text-charcoal-500">
+        <dl className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-grape/10 pt-4 text-[12px] text-grape-800-500">
           <div className="flex items-center gap-1.5">
-            <Flame className="h-3.5 w-3.5 text-terracotta" aria-hidden="true" />
+            <Flame className="h-3.5 w-3.5 text-sunset-600" aria-hidden="true" />
             <dt className="sr-only">Calories</dt>
             <dd>{recipe.caloriesPer100g} kcal / 100g</dd>
           </div>
           <div className="flex items-center gap-1.5">
-            <Leaf className="h-3.5 w-3.5 text-sage-500" aria-hidden="true" />
+            <Leaf className="h-3.5 w-3.5 text-teal-600" aria-hidden="true" />
             <dt className="sr-only">Ingredients</dt>
             <dd>{recipe.ingredients.length} whole ingredients</dd>
           </div>
@@ -77,7 +77,7 @@ export function RecipeCard({
             {recipe.ingredients.map((ingredient) => (
               <li
                 key={ingredient.item}
-                className="rounded-full bg-cream-200/80 px-2.5 py-1 text-[11px] text-charcoal-600"
+                className="rounded-full bg-sand-200/80 px-2.5 py-1 text-[11px] text-grape-800-600"
               >
                 {ingredient.item} · {ingredient.quantity}
               </li>

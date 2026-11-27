@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
         title={
           <>
             A weekly rhythm,
-            <span className="font-serif italic text-terracotta"> built around your dog</span>
+            <span className="font-serif italic text-sunset-600"> built around your dog</span>
           </>
         }
         description="From the first questionnaire to the bowl on the floor — here is exactly what happens, and what we do not do."
@@ -80,7 +80,7 @@ export default function HowItWorksPage() {
           {['Vet-formulated', 'Cooked weekly', 'Delivered Sundays', 'Pause anytime'].map((chip) => (
             <span
               key={chip}
-              className="rounded-full border border-forest/15 bg-white/70 px-3 py-1.5 text-[12px] font-medium text-forest"
+              className="rounded-full border border-grape/15 bg-white/70 px-3 py-1.5 text-[12px] font-medium text-grape-700"
             >
               {chip}
             </span>
@@ -99,27 +99,27 @@ export default function HowItWorksPage() {
           <div className="mt-12 space-y-6">
             {steps.map(({ icon: Icon, number, title, body, detail }, index) => (
               <Reveal key={title} delay={index * 0.04}>
-                <div className="grid gap-5 rounded-3xl border border-forest/10 bg-white p-5 shadow-soft sm:grid-cols-[auto_1fr] sm:p-7 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+                <div className="grid gap-5 rounded-3xl border border-grape/10 bg-white p-5 shadow-soft sm:grid-cols-[auto_1fr] sm:p-7 lg:grid-cols-[auto_1fr_auto] lg:items-center">
                   <div className="flex items-center gap-4">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-forest text-cream">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-grape-700 text-sand">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </span>
-                    <span className="font-display text-[11px] font-bold tracking-[0.2em] text-forest/30 sm:hidden">
+                    <span className="font-display text-[11px] font-bold tracking-[0.2em] text-grape-700/30 sm:hidden">
                       STEP {number}
                     </span>
                   </div>
                   <div>
-                    <p className="hidden text-[10.5px] font-semibold uppercase tracking-[0.18em] text-terracotta-600 sm:block">
+                    <p className="hidden text-[10.5px] font-semibold uppercase tracking-[0.18em] text-sunset-600 sm:block">
                       Step {number}
                     </p>
-                    <h3 className="mt-1 font-display text-xl font-bold text-forest">{title}</h3>
-                    <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-charcoal-600">{body}</p>
-                    <p className="mt-2.5 max-w-2xl border-l-2 border-sage-300 pl-3 text-[12.5px] leading-relaxed text-charcoal-500">
+                    <h3 className="mt-1 font-display text-xl font-bold text-grape-700">{title}</h3>
+                    <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-grape-800-600">{body}</p>
+                    <p className="mt-2.5 max-w-2xl border-l-2 border-teal-300 pl-3 text-[12.5px] leading-relaxed text-grape-800-500">
                       {detail}
                     </p>
                   </div>
                   <div className="hidden lg:block">
-                    <span className="font-display text-4xl font-extrabold text-forest/[0.08]">{number}</span>
+                    <span className="font-display text-4xl font-extrabold text-grape-700/[0.08]">{number}</span>
                   </div>
                 </div>
               </Reveal>
@@ -128,10 +128,10 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="border-y border-forest/10 bg-white py-16 sm:py-20">
+      <section className="border-y border-grape/10 bg-white py-16 sm:py-20">
         <div className="container-x grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <Reveal>
-            <div className="overflow-hidden rounded-[32px] border border-forest/10 shadow-card">
+            <div className="overflow-hidden rounded-[32px] border border-grape/10 shadow-card">
               <img
                 src={images.kitchen.src}
                 alt={images.kitchen.alt}
@@ -151,13 +151,13 @@ export default function HowItWorksPage() {
             />
             <div className="mt-6 space-y-3">
               {safety.map(({ icon: Icon, title, body }) => (
-                <div key={title} className="flex gap-3.5 rounded-2xl border border-forest/10 bg-cream-50 p-4">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-sage-100 text-forest">
+                <div key={title} className="flex gap-3.5 rounded-2xl border border-grape/10 bg-sand-50 p-4">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal-100 text-grape-700">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <div>
-                    <h3 className="font-display text-[14px] font-bold text-forest">{title}</h3>
-                    <p className="mt-0.5 text-[12.5px] leading-relaxed text-charcoal-600">{body}</p>
+                    <h3 className="font-display text-[14px] font-bold text-grape-700">{title}</h3>
+                    <p className="mt-0.5 text-[12.5px] leading-relaxed text-grape-800-600">{body}</p>
                   </div>
                 </div>
               ))}
@@ -178,7 +178,7 @@ export default function HowItWorksPage() {
             title="Switch over 5–7 days"
             description="A sudden change is the fastest way to an upset stomach, even with good food. Mix gradually and watch."
           />
-          <Reveal className="rounded-3xl border border-forest/10 bg-white p-6 shadow-soft">
+          <Reveal className="rounded-3xl border border-grape/10 bg-white p-6 shadow-soft">
             <ol className="space-y-4">
               {[
                 { day: 'Days 1–2', mix: '25% fresh · 75% old food' },
@@ -187,17 +187,17 @@ export default function HowItWorksPage() {
                 { day: 'Day 7', mix: '100% fresh' },
               ].map(({ day, mix }, index) => (
                 <li key={day} className="flex items-center gap-4">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage-100 font-display text-[12px] font-bold text-forest">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-teal-100 font-display text-[12px] font-bold text-grape-700">
                     {index + 1}
                   </span>
                   <div className="flex-1">
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-[13px] font-semibold text-forest">{day}</p>
-                      <p className="text-[12px] text-charcoal-500">{mix}</p>
+                      <p className="text-[13px] font-semibold text-grape-700">{day}</p>
+                      <p className="text-[12px] text-grape-800-500">{mix}</p>
                     </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-forest/10">
+                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-grape-700/10">
                       <div
-                        className="h-full rounded-full bg-terracotta/80"
+                        className="h-full rounded-full bg-sunset-500/80"
                         style={{ width: `${(index + 1) * 25}%` }}
                       />
                     </div>
@@ -205,7 +205,7 @@ export default function HowItWorksPage() {
                 </li>
               ))}
             </ol>
-            <div className="mt-6 space-y-2.5 border-t border-forest/10 pt-5 text-[12.5px] leading-relaxed text-charcoal-600">
+            <div className="mt-6 space-y-2.5 border-t border-grape/10 pt-5 text-[12.5px] leading-relaxed text-grape-800-600">
               <p className="flex gap-2">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
                 {servingNotes.storage}
@@ -223,7 +223,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <RevealGroup className="border-y border-forest/10 bg-forest-800 py-12 text-cream">
+      <RevealGroup className="border-y border-grape/10 bg-grape-700 py-12 text-sand">
         <div className="container-x grid gap-6 sm:grid-cols-3">
           {[
             { label: 'Order cut-off', value: `${deliverySchedule.orderCutoffWeekday}, ${deliverySchedule.orderCutoffTime}` },
@@ -231,11 +231,11 @@ export default function HowItWorksPage() {
             { label: 'Delivery fee', value: 'Free in our zones' },
           ].map((item) => (
             <RevealItem key={item.label}>
-              <div className="rounded-2xl border border-cream/15 bg-cream/[0.04] p-5">
-                <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-sage-300">
+              <div className="rounded-2xl border border-sand/15 bg-sand/[0.04] p-5">
+                <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-teal-300">
                   {item.label}
                 </p>
-                <p className="mt-2 font-display text-lg font-bold text-cream">{item.value}</p>
+                <p className="mt-2 font-display text-lg font-bold text-sand">{item.value}</p>
               </div>
             </RevealItem>
           ))}

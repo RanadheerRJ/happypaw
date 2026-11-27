@@ -43,7 +43,7 @@ export default function AboutPage() {
           <>
             We started because
             <br className="hidden sm:block" /> our own dog
-            <span className="font-serif italic text-terracotta"> stopped eating.</span>
+            <span className="font-serif italic text-sunset-600"> stopped eating.</span>
           </>
         }
         description={`${brand.name} began in a Hyderabad kitchen in ${brand.founded}, after a fussy indie refused kibble for four days and our vet asked a simple question: what are you actually feeding her?`}
@@ -111,7 +111,7 @@ export default function AboutPage() {
           </div>
 
           <Reveal className="space-y-4">
-            <div className="overflow-hidden rounded-[28px] border border-forest/10 shadow-card">
+            <div className="overflow-hidden rounded-[28px] border border-grape/10 shadow-card">
               <img
                 src={images.kitchen.src}
                 alt={images.kitchen.alt}
@@ -123,7 +123,7 @@ export default function AboutPage() {
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="overflow-hidden rounded-2xl border border-forest/10 shadow-soft">
+              <div className="overflow-hidden rounded-2xl border border-grape/10 shadow-soft">
                 <img
                   src={images.bowlChickenPumpkin.src}
                   alt={images.bowlChickenPumpkin.alt}
@@ -134,18 +134,18 @@ export default function AboutPage() {
                   className="aspect-square w-full object-cover"
                 />
               </div>
-              <div className="flex flex-col justify-center rounded-2xl border border-forest/10 bg-forest-800 p-5 text-cream">
-                <p className="font-serif text-lg italic leading-snug text-sage-300">
+              <div className="flex flex-col justify-center rounded-2xl border border-grape/10 bg-grape-700 p-5 text-sand">
+                <p className="font-serif text-lg italic leading-snug text-teal-300">
                   “If it would not go into a family meal, it does not go into a bowl.”
                 </p>
-                <p className="mt-3 text-[11.5px] text-cream/60">Our kitchen rule, since day one.</p>
+                <p className="mt-3 text-[11.5px] text-sand/60">Our kitchen rule, since day one.</p>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-y border-forest/10 bg-white py-16">
+      <section className="border-y border-grape/10 bg-white py-16">
         <div className="container-x">
           <SectionHeading
             eyebrow="What we stand for"
@@ -155,12 +155,12 @@ export default function AboutPage() {
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-3">
             {values.map(({ icon: Icon, title, body }) => (
               <RevealItem key={title}>
-                <div className="h-full rounded-3xl border border-forest/10 bg-cream-50 p-6 text-center">
-                  <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-forest text-cream">
+                <div className="h-full rounded-3xl border border-grape/10 bg-sand-50 p-6 text-center">
+                  <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-grape-700 text-sand">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-4 font-display text-[15px] font-bold text-forest">{title}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">{body}</p>
+                  <h3 className="mt-4 font-display text-[15px] font-bold text-grape-700">{title}</h3>
+                  <p className="mt-2 text-[13px] leading-relaxed text-grape-800-600">{body}</p>
                 </div>
               </RevealItem>
             ))}
@@ -183,11 +183,11 @@ export default function AboutPage() {
                 ['Delivery', `${deliverySchedule.deliveryWeekday}, ${deliverySchedule.deliveryWindow}`],
                 ['Order cut-off', `${deliverySchedule.orderCutoffWeekday}, ${deliverySchedule.orderCutoffTime}`],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-2xl border border-forest/10 bg-white p-4">
-                  <dt className="text-[10px] font-semibold uppercase tracking-[0.12em] text-charcoal-400">
+                <div key={label} className="rounded-2xl border border-grape/10 bg-white p-4">
+                  <dt className="text-[10px] font-semibold uppercase tracking-[0.12em] text-grape-800-400">
                     {label}
                   </dt>
-                  <dd className="mt-1 text-[12.5px] font-semibold text-forest">{value}</dd>
+                  <dd className="mt-1 text-[12.5px] font-semibold text-grape-700">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -197,9 +197,9 @@ export default function AboutPage() {
               </Link>
             </Button>
           </div>
-          <Reveal className="rounded-3xl border border-forest/10 bg-cream-100/70 p-6">
-            <h3 className="font-display text-lg font-bold text-forest">A note on this build</h3>
-            <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">
+          <Reveal className="rounded-3xl border border-grape/10 bg-sand-100/70 p-6">
+            <h3 className="font-display text-lg font-bold text-grape-700">A note on this build</h3>
+            <p className="mt-2 text-[13px] leading-relaxed text-grape-800-600">
               {brand.name} is an early-stage service. The recipes, sourcing and delivery process shown
               here describe how we work, and testimonials reflect real customer experiences. Checkout
               takes a card through a placeholder payment gateway — full payment integration lands at
@@ -210,7 +210,7 @@ export default function AboutPage() {
               <Badge variant="outline">Vet-reviewable recipes</Badge>
               <Badge variant="outline">Weekly Hyderabad delivery</Badge>
             </div>
-            <p className="mt-5 border-t border-forest/10 pt-4 text-[11.5px] leading-relaxed text-charcoal-500">
+            <p className="mt-5 border-t border-grape/10 pt-4 text-[11.5px] leading-relaxed text-grape-800-500">
               {brand.medicalFootnote}
             </p>
           </Reveal>

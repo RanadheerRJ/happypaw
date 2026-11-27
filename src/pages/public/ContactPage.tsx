@@ -66,7 +66,7 @@ export default function ContactPage() {
         title={
           <>
             Real people,
-            <span className="font-serif italic text-terracotta"> usually in the kitchen</span>
+            <span className="font-serif italic text-sunset-600"> usually in the kitchen</span>
           </>
         }
         description="Questions about a plan, a delivery or a dog with a delicate stomach — email is the fastest way to reach us."
@@ -96,10 +96,10 @@ export default function ContactPage() {
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 noValidate
-                className="rounded-3xl border border-forest/10 bg-white p-5 shadow-soft sm:p-7"
+                className="rounded-3xl border border-grape/10 bg-white p-5 shadow-soft sm:p-7"
               >
-                <h2 className="font-display text-xl font-bold text-forest">Send us a message</h2>
-                <p className="mt-1 text-[13px] text-charcoal-500">
+                <h2 className="font-display text-xl font-bold text-grape-700">Send us a message</h2>
+                <p className="mt-1 text-[13px] text-grape-800-500">
                   We usually reply within one working day, {brand.hours}.
                 </p>
 
@@ -131,7 +131,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <Label htmlFor="contact-phone">
-                      Phone <span className="font-normal text-charcoal-400">(optional)</span>
+                      Phone <span className="font-normal text-grape-800-400">(optional)</span>
                     </Label>
                     <Input
                       id="contact-phone"
@@ -182,7 +182,7 @@ export default function ContactPage() {
                     </>
                   )}
                 </Button>
-                <p className="mt-3 text-center text-[11px] text-charcoal-400">
+                <p className="mt-3 text-center text-[11px] text-grape-800-400">
                   We reply within one working day. Your details are used only to answer your message.
                 </p>
               </form>
@@ -190,40 +190,40 @@ export default function ContactPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="rounded-3xl border border-forest/10 bg-forest-800 p-6 text-cream">
-              <h2 className="font-display text-lg font-bold text-cream">Reach us directly</h2>
+            <div className="rounded-3xl border border-grape/10 bg-grape-700 p-6 text-sand">
+              <h2 className="font-display text-lg font-bold text-sand">Reach us directly</h2>
               <ul className="mt-4 space-y-3.5 text-[13px]">
                 <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-sage-300" aria-hidden="true" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
                   <span>
-                    <a href={`mailto:${brand.email}`} className="font-medium text-cream hover:underline">
+                    <a href={`mailto:${brand.email}`} className="font-medium text-sand hover:underline">
                       {brand.email}
                     </a>
-                    <span className="block text-[11.5px] text-cream/50">Orders &amp; general</span>
+                    <span className="block text-[11.5px] text-sand/50">Orders &amp; general</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-sage-300" aria-hidden="true" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
                   <span>
-                    <a href={`mailto:${brand.supportEmail}`} className="font-medium text-cream hover:underline">
+                    <a href={`mailto:${brand.supportEmail}`} className="font-medium text-sand hover:underline">
                       {brand.supportEmail}
                     </a>
-                    <span className="block text-[11.5px] text-cream/50">Delivery &amp; account support</span>
+                    <span className="block text-[11.5px] text-sand/50">Delivery &amp; account support</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-sage-300" aria-hidden="true" />
-                  <a href={`tel:${brand.phoneHref}`} className="font-medium text-cream hover:underline">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
+                  <a href={`tel:${brand.phoneHref}`} className="font-medium text-sand hover:underline">
                     {brand.phone}
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-sage-300" aria-hidden="true" />
-                  <span className="text-cream/80">{brand.hours}</span>
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
+                  <span className="text-sand/80">{brand.hours}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sage-300" aria-hidden="true" />
-                  <span className="text-cream/80">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
+                  <span className="text-sand/80">
                     {brand.address.line1}
                     <br />
                     {brand.address.city} {brand.address.pincode}
@@ -232,22 +232,22 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-forest/10 bg-white p-5">
-              <h3 className="font-display text-[14px] font-bold text-forest">Looking for a vet partner?</h3>
-              <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-600">
+            <div className="rounded-3xl border border-grape/10 bg-white p-5">
+              <h3 className="font-display text-[14px] font-bold text-grape-700">Looking for a vet partner?</h3>
+              <p className="mt-1.5 text-[12.5px] leading-relaxed text-grape-800-600">
                 Choose “Vet partnership” in the form, or read the programme page first.
               </p>
               <Link
                 to="/vets"
-                className="mt-3 inline-block text-[12.5px] font-semibold text-forest underline decoration-sage-400 underline-offset-4"
+                className="mt-3 inline-block text-[12.5px] font-semibold text-grape-700 underline decoration-teal-400 underline-offset-4"
               >
                 Vet partner programme →
               </Link>
             </div>
 
-            <div className="rounded-3xl border border-forest/10 bg-cream-100/70 p-5">
-              <h3 className="font-display text-[13.5px] font-bold text-forest">Food safety or allergy query?</h3>
-              <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600">
+            <div className="rounded-3xl border border-grape/10 bg-sand-100/70 p-5">
+              <h3 className="font-display text-[13.5px] font-bold text-grape-700">Food safety or allergy query?</h3>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-grape-800-600">
                 {brand.medicalFootnote}
               </p>
             </div>
